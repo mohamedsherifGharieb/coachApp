@@ -1,0 +1,18 @@
+
+const request = require('request');
+
+var options = {
+  method: 'post',
+  body: {json:'nadine'}, 
+  json: true,
+  url: 'http://localhost/
+};
+
+request(options, function (err, res, body) {
+  if (err) {
+    console.log('Error :', err)
+    
+  }
+  console.log(' Body :', body)
+
+});
