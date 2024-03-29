@@ -4,6 +4,6 @@
     "node": "^18.20.0"
   },
   "scripts": {
-    "start": "java -cp \".;bin;lib/joda-time-2.9.9.jar\" sample.Main"
+    "start": "java -cp \"./bin;./lib/*\" sample.Main"
   }
 }
