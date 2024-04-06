@@ -82,7 +82,8 @@ public class Main extends Application {
     String  setFiles = "";
     String pgRequest = "";
     final String local = "http://localhost:5080";
-    final String heroku = "https://frozen-citadel-98016-4ac27ecd8250.herokuapp.com/";
+    final String heroku = "https://server---app-d244e2f2d7c9.herokuapp.com";
+
     String urlFinal = heroku; //local //heroku
 //    Button signupEBtn = new Button();
 //    Calendar calendar = new GregorianCalendar();
@@ -242,6 +243,24 @@ public class Main extends Application {
         passwordHBox.setAlignment(Pos.CENTER);
         passwordHBox.setSpacing(5);
 
+        Label emailSLabel = new Label("Email:");
+            emailSLabel.setTextAlignment(TextAlignment.CENTER);
+            emailSLabel.setAlignment(Pos.CENTER);
+            emailSLabel.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 15));
+            emailSLabel.setContentDisplay(ContentDisplay.CENTER);
+            emailSLabel.setPrefWidth(190);
+            emailSLabel.setPrefHeight(40);
+
+            TextField emailSField = new TextField();
+            emailSField.setPrefSize(270, 40);
+            emailSField.setEditable(true);
+            emailSField.setPromptText("example@example.com");
+            
+            HBox emailSHBox = new HBox();           
+            emailSHBox.getChildren().addAll(emailSLabel, emailSField);
+            emailSHBox.setAlignment(Pos.CENTER);
+            emailSHBox.setSpacing(5);   
+
         //Buttons
         Button loginBtn = new Button("Login");
         loginBtn.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
@@ -380,7 +399,7 @@ public class Main extends Application {
         buttonsSignup.setSpacing(70);
         buttonsSignup.getChildren().addAll(signupSBtn, cancelSignup);
 
-        signupVBox.getChildren().addAll(signupLabelHBox, userNameSHBox, passwordSHBox, repeatPassHBox, buttonsSignup);
+        signupVBox.getChildren().addAll(signupLabelHBox, userNameSHBox, passwordSHBox, repeatPassHBox,emailSHBox, buttonsSignup);
         signupVBox.setAlignment(Pos.CENTER);
         signupVBox.setSpacing(20);
         Scene signupScene = new Scene(signupVBox, 560, 295);
@@ -405,7 +424,8 @@ public class Main extends Application {
         });
         loginBtn.setOnMouseClicked(event -> {
             pgRequest = "coachLogin";
-                web.getEngine().load(urlFinal + "/coachLogin/?userName=" + userNameField.getText()+ "&password=" + passwordField.getText());
+                web.getEngine().load(urlFinal + "/coachLogin/?userName=" + userNameField.getText()+ "&password=" + passwordField.getText()+ "&email=" 
+                + emailSField.getText());
         });
 
         cancelLogin.setOnMouseEntered(event -> {
