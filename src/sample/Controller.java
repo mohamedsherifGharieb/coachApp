@@ -29,6 +29,7 @@ import sample.utils.SavePlan;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.DirectoryStream;
@@ -50,6 +51,8 @@ public class Controller extends PlanParser implements Initializable {
     @FXML Button newWeekPlanButton;
     @FXML Button removeWeekPlanButton;
     @FXML Button saveAndExitButton;
+    Button emailButton;
+    Button chatButton;
     Button addTaskButton = new Button("Add");
 
     Button removeTaskButton = new Button();
@@ -76,6 +79,7 @@ public class Controller extends PlanParser implements Initializable {
     @FXML VBox fullWeekPlanVBox;
     @FXML VBox weekTitleVBox;
     @FXML VBox tasksVBox;
+    HBox buttonBoxChatandemail;
 
     @FXML Label weekPlanLabel;
     @FXML Label sDateLabel;
@@ -107,26 +111,6 @@ public class Controller extends PlanParser implements Initializable {
     Adaptor adaptor = Adaptor.getInstance();
 
     public void initialize(URL url, ResourceBundle rb) {
-//        File coachFile = new File("C:\\Users\\" + System.getProperty("user.name") +"\\Desktop\\Coach");
-//        URI u = coachFile.toURI();
-//        Path path = Paths.get(u);
-//        try(DirectoryStream<Path> dirStream = Files.newDirectoryStream(path)) {
-//             if(dirStream.iterator().hasNext()){
-//                 System.out.println("Fih Files<<<<<<<<<<<");
-//             }
-//            else {
-//                 System.out.println("Mafish Files>>>>>>>>>>>>");
-//             }
-//        }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-        //coach.patients.add(LoadPlan.parse("C:\\Users\\" + System.getProperty("user.name") +"\\Desktop\\SavePlan.txt"));
-        //coach.setCoachName(coach.patients.get(0).getCoachName());
-
         addTaskButton.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         patientsVBox.getChildren().clear();
         patientsVBox.getChildren().add(addPatientButton);
@@ -171,6 +155,77 @@ public class Controller extends PlanParser implements Initializable {
         sDateLabel.setText("");
         eDateLabel.setText("");
 
+
+          // Chat Button
+          chatButton = new Button("Chat");
+          chatButton.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
+          chatButton.setTextFill(Color.BLACK);
+          chatButton.setPrefWidth(75);
+          chatButton.setPrefHeight(25);
+          chatButton.setStyle("-fx-base: white; -fx-background-color: #FFFFFFEE;");
+          chatButton.setOnMouseEntered(event -> {
+              chatButton.setEffect(borderGlow);
+          });
+          chatButton.setOnMouseExited(event -> {
+              chatButton.setEffect(null);
+          });
+          // Add event handler for chat button
+          chatButton.setOnAction(event -> {
+              // Add your chat functionality here
+              System.out.println("Chat button clicked");
+          });
+          
+          // Email Button
+          emailButton = new Button("Email");
+          emailButton.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
+          emailButton.setTextFill(Color.BLACK);
+          emailButton.setPrefWidth(100);
+          emailButton.setPrefHeight(25);
+          emailButton.setStyle("-fx-base: white; -fx-background-color: #FFFFFFEE;");
+          emailButton.setOnMouseEntered(event -> {
+              emailButton.setEffect(borderGlow);
+          });
+          emailButton.setOnMouseExited(event -> {
+              emailButton.setEffect(null);
+          });
+          // Add event handler for email button
+          emailButton.setOnAction(event -> {
+              // Create a VBox to hold the text area and submit button
+              VBox vbox = new VBox();
+                
+              // Create a text area for the message
+              TextArea messageTextArea = new TextArea();
+              messageTextArea.setPromptText("Enter your message here...");
+          
+              // Create a submit button
+              Button submitButton = new Button("Submit");
+              submitButton.setOnAction(submitEvent -> {
+                  // Handle submission logic here, e.g., send the email
+                  String message = messageTextArea.getText();
+                  sendEmail(message);
+                  ((Button) submitEvent.getSource()).getScene().getWindow().hide();
+              });
+          
+              // Add components to VBox
+              vbox.getChildren().addAll(messageTextArea, submitButton);
+          
+              // Create an alert dialog to display the VBox
+              Alert alert = new Alert(Alert.AlertType.NONE);
+              alert.getDialogPane().setContent(vbox);
+              alert.setTitle("Email");
+              alert.showAndWait();
+          });                                               
+          
+          // Create HBox container
+          buttonBoxChatandemail = new HBox();
+          buttonBoxChatandemail.setAlignment(Pos.CENTER);
+          buttonBoxChatandemail.setSpacing(1); // Set spacing between buttons
+          
+          // Add chat button to the HBox
+          buttonBoxChatandemail.getChildren().addAll(chatButton,emailButton);
+          
+          
+        
         Monday.setUserData(2);
         Monday.setToggleGroup(toggleDays);
         Monday.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -439,6 +494,8 @@ public class Controller extends PlanParser implements Initializable {
                 if(newValue==null) {
                     removePatientButton.setDisable(true);
                     removeWeekPlanButton.setDisable(true);
+                    chatButton.setVisible(true);
+                    emailButton.setVisible(true);
                     tasksVBox.setDisable(true);
                     daysHBox.setDisable(true);
                     toggleDays.selectToggle(null);
@@ -462,16 +519,9 @@ public class Controller extends PlanParser implements Initializable {
                     adaptor.getOverPerfButton().setDisable(false);
                     removePatientButton.setDisable(false);
                     adaptor.getRemovePatientButton().setDisable(false);
-                    //adaptor.setRemovePatientButton(removePatientButton);
-                    System.out.println(coach.getPatientByName(togglePatients.getSelectedToggle().getUserData()+ "") + "  toggle patient  setting this to patient selected");
                     weekPlanVBox.setDisable(false);
                     patientSelected = coach.getPatientByName(togglePatients.getSelectedToggle().getUserData()+ "");
-                    System.out.println(patientSelected.getPatientName() + " this is toggle patients");
-//                    ArrayList<WeekPlan> oldWPlans = new ArrayList<WeekPlan>();
-//                    for(int x = oldWPlans.size()-1; x >= 0 ; x--){
-//                        coach.getPatientByName(patientSelected.getPatientName()).plans.add(0, oldWPlans.get(x));
-//                    }
-                    //patientSelected.setPlans(LoadPlan.parse(patientSelected.file));
+
                     adaptor.setPatientSelected(patientSelected);
                     adaptor.setSelectedPName(patientSelected.getPatientName());
                     addWeekPlansToVBox();
@@ -711,7 +761,6 @@ public class Controller extends PlanParser implements Initializable {
         tasksHBox.getChildren().clear();
         if(weekPlanSelected != null) {
             daySelected = weekPlanSelected.days.get((int) toggleDays.getSelectedToggle().getUserData() - 1);
-            //System.out.println((int) toggleDays.getSelectedToggle().getUserData());
             daySelectedID = daySelected.getDayID();
             System.out.println(daySelected.tasks.size());
 
@@ -941,7 +990,6 @@ public class Controller extends PlanParser implements Initializable {
     public void addPatientsToVBox(){
         patientsVBox.getChildren().clear();
         patientsVBox.getChildren().add(addPatientButton);
-        System.out.println(coach.patients.size() + "   adding P to VBOX coach patients count");
         for(int x = 0; x < coach.patients.size(); x++) {
             if (!coach.patients.get(x).getPatientName().equals("")) {
                 ToggleButton patientName = new ToggleButton(coach.patients.get(x).getPatientName());
@@ -988,9 +1036,43 @@ public class Controller extends PlanParser implements Initializable {
 //            });
 //        }
     }
+                                             
+    public void sendEmail(String message) {
+        if(message.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Message cannot be empty!");
+        alert.showAndWait();
+        }
+         try {
+                URL url = new URL("https://server---app-d244e2f2d7c9.herokuapp.com");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("Get");
+                connection.setDoOutput(true);
+                
+                // Construct the request body with patient name, email, and message
+                String requestBody = "/sendEmailC/?coachUsername=" + adaptor.getPatientSelected().getCoachName() + "&name=" + adaptor.getPatientSelected().getPatientName() + "&message=" + message;
+                
+                // Write the request body to the connection output stream
+
+                connection.getOutputStream().write(requestBody.getBytes());
+                
+                // Get the response code (optional)
+                int responseCode = connection.getResponseCode();
+                
+                // Close the connection
+                connection.disconnect();
+                
+                // Optionally, handle the response code or response body
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     public void addWeekPlansToVBox(){
         weekPlanVBox.getChildren().clear();
-        weekPlanVBox.getChildren().add(newWeekPlanButton);
+        weekPlanVBox.getChildren().addAll(buttonBoxChatandemail,newWeekPlanButton);
         System.out.println("from controller: weekplans number: " + adaptor.getPatientSelected().plans.size() );
         for(int x = 0; x < adaptor.getPatientSelected().plans.size(); x++){
             ToggleButton weekPlanName = new ToggleButton(patientSelected.plans.get(x).getWeekPlanName());
@@ -1024,7 +1106,6 @@ public class Controller extends PlanParser implements Initializable {
                 }
             });
             weekPlanVBox.getChildren().add(weekPlanName);
-            System.out.println(patientSelected.plans.get(x).getWeekPlanID() + "<<<<<<<");
         }
 
         ObservableList<Node> weekPlans = weekPlanVBox.getChildren();

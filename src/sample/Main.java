@@ -424,8 +424,7 @@ public class Main extends Application {
         });
         loginBtn.setOnMouseClicked(event -> {
             pgRequest = "coachLogin";
-                web.getEngine().load(urlFinal + "/coachLogin/?userName=" + userNameField.getText()+ "&password=" + passwordField.getText()+ "&email=" 
-                + emailSField.getText());
+                web.getEngine().load(urlFinal + "/coachLogin/?userName=" + userNameField.getText()+ "&password=" + passwordField.getText());
         });
 
         cancelLogin.setOnMouseEntered(event -> {
@@ -467,9 +466,9 @@ public class Main extends Application {
             });
             signupSBtn.setOnMouseClicked(event1 -> {
                 if(passwordSField.getText().equals(repeatPassField.getText())){
-                    System.out.println("passwords Match!!!");
                     pgRequest = "coachSignup";
-                    web.getEngine().load(urlFinal + "/coachSignup/?userName="+userNameSField.getText()+"&password="+passwordSField.getText());
+                    web.getEngine().load(urlFinal + "/coachSignup/?userName="+userNameSField.getText()+"&password="+passwordSField.getText() + "&email=" 
+                    + emailSField.getText());
                 }
                 else{
                     System.out.println("passwrods do not Match!!!");
@@ -572,7 +571,9 @@ public class Main extends Application {
         });
         cancelTRemove.setOnMouseExited(event8 -> {
             cancelTRemove.setEffect(null);
-        });
+        });                                                               
+        
+      
 
         HBox buttonsTRemove = new HBox();
         buttonsTRemove.setStyle("-fx-background-color: #2e6a6f;");
@@ -1258,7 +1259,6 @@ public class Main extends Application {
                                 || sMin.getSelectionModel().isEmpty()
                                 || eHour.getSelectionModel().isEmpty() 
                                 || eMin.getSelectionModel().isEmpty() )){
-                        		System.out.println("i am here");
                         	
                         Boolean uniqueTName = true;
                         for (int x = 0; x < adaptor.getDaySelected().getTasks().size(); x++) {
@@ -1816,7 +1816,6 @@ public class Main extends Application {
 
         removePBtn.setOnMouseClicked(event -> {
             pgRequest = "removePatient";
-            System.out.println("in remove button");
             webengine.load(urlFinal + "/removePatient/?coachName=" + adaptor.getCoach().getCoachName()
                     + "&patientName=" + pRNameLabel.getText());
         });
@@ -2255,14 +2254,12 @@ public class Main extends Application {
                             }
                             break;
                         case "removePatient":
-                            System.out.println("wesel el remove!!!");
                             if(webengine.getDocument().getDocumentElement().getTextContent().equals("?removeSuccess?")){
                                 adaptor.getMainHBox().setDisable(false);
                                 removePStage.close();
                                 adaptor.getRemovePbtn().defaultButtonProperty().setValue(true);
                             }
                             else {
-                                System.out.println("error fel remove!!!");
                                 removePStage.close();
                                 errorText.setText("");
                                 errorText.setText("Error while removing Patient");
