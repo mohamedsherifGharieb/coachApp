@@ -174,55 +174,13 @@ public class Controller extends PlanParser implements Initializable {
               // Add your chat functionality here
               System.out.println("Chat button clicked");
           });
-          
-          // Email Button
-          emailButton = new Button("Email");
-          emailButton.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
-          emailButton.setTextFill(Color.BLACK);
-          emailButton.setPrefWidth(100);
-          emailButton.setPrefHeight(25);
-          emailButton.setStyle("-fx-base: white; -fx-background-color: #FFFFFFEE;");
-          emailButton.setOnMouseEntered(event -> {
-              emailButton.setEffect(borderGlow);
-          });
-          emailButton.setOnMouseExited(event -> {
-              emailButton.setEffect(null);
-          });
-          // Add event handler for email button
-          emailButton.setOnAction(event -> {
-              // Create a VBox to hold the text area and submit button
-              VBox vbox = new VBox();
-                
-              // Create a text area for the message
-              TextArea messageTextArea = new TextArea();
-              messageTextArea.setPromptText("Enter your message here...");
-          
-              // Create a submit button
-              Button submitButton = new Button("Submit");
-              submitButton.setOnAction(submitEvent -> {
-                  // Handle submission logic here, e.g., send the email
-                  String message = messageTextArea.getText();
-                  sendEmail(message);
-                  ((Button) submitEvent.getSource()).getScene().getWindow().hide();
-              });
-          
-              // Add components to VBox
-              vbox.getChildren().addAll(messageTextArea, submitButton);
-          
-              // Create an alert dialog to display the VBox
-              Alert alert = new Alert(Alert.AlertType.NONE);
-              alert.getDialogPane().setContent(vbox);
-              alert.setTitle("Email");
-              alert.showAndWait();
-          });                                               
-          
           // Create HBox container
           buttonBoxChatandemail = new HBox();
           buttonBoxChatandemail.setAlignment(Pos.CENTER);
           buttonBoxChatandemail.setSpacing(1); // Set spacing between buttons
           
           // Add chat button to the HBox
-          buttonBoxChatandemail.getChildren().addAll(chatButton,emailButton);
+          buttonBoxChatandemail.getChildren().addAll(chatButton);
           
           
         
@@ -1036,39 +994,6 @@ public class Controller extends PlanParser implements Initializable {
 //            });
 //        }
     }
-                                             
-    public void sendEmail(String message) {
-        if(message.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Warning");
-        alert.setHeaderText(null);
-        alert.setContentText("Message cannot be empty!");
-        alert.showAndWait();
-        }
-         try {
-                URL url = new URL("https://server---app-d244e2f2d7c9.herokuapp.com");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("Get");
-                connection.setDoOutput(true);
-                
-                // Construct the request body with patient name, email, and message
-                String requestBody = "/sendEmailC/?coachUsername=" + adaptor.getPatientSelected().getCoachName() + "&name=" + adaptor.getPatientSelected().getPatientName() + "&message=" + message;
-                
-                // Write the request body to the connection output stream
-
-                connection.getOutputStream().write(requestBody.getBytes());
-                
-                // Get the response code (optional)
-                int responseCode = connection.getResponseCode();
-                
-                // Close the connection
-                connection.disconnect();
-                
-                // Optionally, handle the response code or response body
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
     public void addWeekPlansToVBox(){
         weekPlanVBox.getChildren().clear();
