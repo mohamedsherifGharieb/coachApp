@@ -93,6 +93,42 @@ public class Main extends Application {
     TextField userNameSField = new TextField();
     PasswordField passwordSField = new PasswordField();
 
+    public void email(String masssege){
+        try {
+            System.out.println("sent email");
+            // Construct the request URL with parameters
+            String baseUrl = "https://server---app-d244e2f2d7c9.herokuapp.com";
+            String coachUsername = adaptor.getPatientSelected().getCoachName();
+            String patientName = adaptor.getPatientSelected().getPatientName();
+            String requestUrl = String.format("%s/sendEmailC/?coachUsername=%s&name=%s&message=%s", baseUrl, coachUsername, patientName,masssege);
+
+            // Create a URL object
+            URL url = new URL(requestUrl);
+
+            // Open connection
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            // Get the response
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // Print response
+            System.out.println("Response: " + response.toString());
+
+            // Disconnect
+            connection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }                
+    };
+
     public void start(Stage stage) throws Exception {
         //setting buttons effect
         int depth = 3;
@@ -169,6 +205,7 @@ public class Main extends Application {
         errorOkButton.setOnMouseExited(event4 -> {
             errorOkButton.setEffect(null);
         });
+   
 
         HBox buttonsError = new HBox();
         buttonsError.setStyle("-fx-background-color: #2e6a6f;");
@@ -587,6 +624,8 @@ public class Main extends Application {
             removeTName.setText("");
             adaptor.getRemoveTbtn().defaultButtonProperty().setValue(true);
             removeTStage.close();
+            email("Task has been removed from the weekplan"+":"+adaptor.getWeekPlanSelected().getWeekPlanName());
+
         });
         cancelTRemove.setOnMouseClicked(event8 -> {
             adaptor.getMainHBox().setDisable(false);
@@ -1097,36 +1136,10 @@ public class Main extends Application {
                 for(int x = 0 ; x < progsList.getItems().size(); x++){
                     adaptor.getAddTPrograms().add(new Program(progsList.getItems().get(x).toString()));
                 }
-                System.out.println("addtbtn progslist bef: " + progsList.getItems().size());
                 progsList.getItems().clear();
-                System.out.println("addtbtn progslist bef: " + progsList.getItems().size());
                 addTStage.close();
                 adaptor.getMainHBox().setDisable(false);
-                adaptor.getAddTbtn().defaultButtonProperty().setValue(true);
-                try {
-                    URL url = new URL("https://server---app-d244e2f2d7c9.herokuapp.com");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setDoOutput(true);
-                    
-                    // Construct the request body with patient name, email, and message
-                    String requestBody = "/sendEmailC/?coachUsername=" + adaptor.getPatientSelected().getCoachName() + "&name=" + adaptor.getPatientSelected().getPatientName();
-                    
-                    // Write the request body to the connection output stream
-    
-                    connection.getOutputStream().write(requestBody.getBytes());
-                    
-                    // Get the response code (optional)
-                    int responseCode = connection.getResponseCode();
-                    
-                    // Close the connection
-                    connection.disconnect();
-                    
-                    // Optionally, handle the response code or response body
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            
+                adaptor.getAddTbtn().defaultButtonProperty().setValue(true);               
             }
             else {
                 addTStage.hide();
@@ -1306,6 +1319,7 @@ public class Main extends Application {
                             adaptor.getMainHBox().setDisable(false);
                             adaptor.getEditTaskbtn().defaultButtonProperty().setValue(false);
                             adaptor.getEditTbtn().defaultButtonProperty().setValue(true);
+                            email("Changed has been made on Task:"+":"+adaptor.getTaskSelectedName());
                         }
                         else {
                             addTStage.hide();
@@ -1404,6 +1418,7 @@ public class Main extends Application {
                     addTStage.close();
                     adaptor.getMainHBox().setDisable(false);
                     adaptor.getAddTbtn().defaultButtonProperty().setValue(true);
+                    email("A new Task has been created Check the weekPlan"+":"+adaptor.getWeekPlanSelected().getWeekPlanName());
                 }
                 else {
                     addTStage.hide();
@@ -1738,6 +1753,7 @@ public class Main extends Application {
             adaptor.getMainHBox().setDisable(false);
             removeWStage.close();
             adaptor.getRemoveWbtn().defaultButtonProperty().setValue(true);
+            email("weekPlan has been removed :"+""+adaptor.getWeekPlanSelected().getWeekPlanName());
         });
         removeWBtn.setOnMouseEntered(event -> {
             removeWBtn.setEffect(borderGlow);
@@ -1953,6 +1969,9 @@ public class Main extends Application {
 
         datePicker.setDayCellFactory(dp -> new DateCell() {
         @Override
+
+        
+    
         public void updateItem(LocalDate item, boolean empty) {
             super.updateItem(item, empty);
             if(adaptor.getPatientSelected().plans.size() == 0){
@@ -2022,29 +2041,6 @@ public class Main extends Application {
         });
 
         newWPBtn.setOnMouseClicked(event2 -> {
-//            if(startDate.getValue().getDayOfWeek().getValue() != 1){
-//                System.out.println(startDate.getValue() + "  selected Date Value<<<");
-//                errorMessage = new Stage();
-//                errorMessage.initModality(Modality.APPLICATION_MODAL);
-//                errorMessage.initOwner(stage);
-//                errorMessage.centerOnScreen();
-//                errorText.setText("Only Mondays are valid");
-//                errorMessage.initStyle(StageStyle.TRANSPARENT);
-//                errorMessage.setAlwaysOnTop(true);
-//                errorMessage.setScene(errorScene);
-//                errorMessage.setResizable(false);
-//                errorMessage.show();
-//                File file = new File("Notification.mp3");
-//                Media media = new Media(file.toURI().toString());
-//                MediaPlayer mediaplayer = new MediaPlayer(media);
-//                mediaplayer.play();
-//                newWStage.close();
-//                errorOkButton.setOnMouseClicked(event -> {
-//                    newWStage.show();
-//                    errorMessage.close();
-//                });
-//            }
-//            else{
             boolean uniqueWPName = true;
             for(int x = 0; x < adaptor.getPatientSelected().getPlans().size(); x++){
                 if(adaptor.getPatientSelected().getPlans().get(x).getWeekPlanName().equals(wPNameField.getText())){
@@ -2061,11 +2057,9 @@ public class Main extends Application {
                 adaptor.getMainHBox().setDisable(false);
                 adaptor.getNewWbtn().defaultButtonProperty().setValue(true);
                 wPNameField.setText("");
-
-                // adaptor.setStartDatePicker(startDate);
-
                 datePicker.setValue(null);
                 newWStage.close();
+                email("weekPlan has been added :"+""+adaptor.getWeekPlanSelected().getWeekPlanName());
             }
             else{
                 newWStage.hide();
@@ -2324,8 +2318,10 @@ public class Main extends Application {
         
     }
 
+    
     public static void main(String[] args) {
         launch(args);
     }
+    
     
 }
