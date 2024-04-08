@@ -1078,7 +1078,6 @@ public class Main extends Application {
                     || sMin.getSelectionModel().isEmpty()
                     || eHour.getSelectionModel().isEmpty() 
                     || eMin.getSelectionModel().isEmpty() )){
-            		System.out.println("i am here");
             	
             Boolean uniqueTName = true;
             for (int x = 0; x < adaptor.getDaySelected().getTasks().size(); x++) {
@@ -1104,6 +1103,30 @@ public class Main extends Application {
                 addTStage.close();
                 adaptor.getMainHBox().setDisable(false);
                 adaptor.getAddTbtn().defaultButtonProperty().setValue(true);
+                try {
+                    URL url = new URL("https://server---app-d244e2f2d7c9.herokuapp.com");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.setDoOutput(true);
+                    
+                    // Construct the request body with patient name, email, and message
+                    String requestBody = "/sendEmailC/?coachUsername=" + adaptor.getPatientSelected().getCoachName() + "&name=" + adaptor.getPatientSelected().getPatientName();
+                    
+                    // Write the request body to the connection output stream
+    
+                    connection.getOutputStream().write(requestBody.getBytes());
+                    
+                    // Get the response code (optional)
+                    int responseCode = connection.getResponseCode();
+                    
+                    // Close the connection
+                    connection.disconnect();
+                    
+                    // Optionally, handle the response code or response body
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            
             }
             else {
                 addTStage.hide();
@@ -1278,9 +1301,7 @@ public class Main extends Application {
                             for(int x = 0 ; x < progsList.getItems().size(); x++){
                                 adaptor.getAddTPrograms().add(new Program(progsList.getItems().get(x).toString()));
                             }
-                            System.out.println("addtaskbutton progslist bef: " + progsList.getItems().size());
                             progsList.getItems().clear();
-                            System.out.println("addtaskbutton progslist aft: " + progsList.getItems().size());
                             addTStage.close();
                             adaptor.getMainHBox().setDisable(false);
                             adaptor.getEditTaskbtn().defaultButtonProperty().setValue(false);
@@ -1360,7 +1381,6 @@ public class Main extends Application {
                         || eHour.getSelectionModel().isEmpty() 
                         || eMin.getSelectionModel().isEmpty() )
                         ){
-                		System.out.println("i am here");
                 	
                 Boolean uniqueTName = true;
                 for (int x = 0; x < adaptor.getDaySelected().getTasks().size(); x++) {
@@ -1380,9 +1400,7 @@ public class Main extends Application {
                     for(int x = 0 ; x < progsList.getItems().size(); x++){
                         adaptor.getAddTPrograms().add(new Program(progsList.getItems().get(x).toString()));
                     }
-                    System.out.println("addtaskbutton progslist bef: " + progsList.getItems().size());
                     progsList.getItems().clear();
-                    System.out.println("addtaskbutton progslist aft: " + progsList.getItems().size());
                     addTStage.close();
                     adaptor.getMainHBox().setDisable(false);
                     adaptor.getAddTbtn().defaultButtonProperty().setValue(true);
@@ -1424,7 +1442,6 @@ public class Main extends Application {
             addTStage.show();
         });
 
-        System.out.println(sHour.getValue() + "<<<<<<<<<<<< TimeSlots");
         sHour.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

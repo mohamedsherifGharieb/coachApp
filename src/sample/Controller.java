@@ -160,7 +160,7 @@ public class Controller extends PlanParser implements Initializable {
           chatButton = new Button("Chat");
           chatButton.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
           chatButton.setTextFill(Color.BLACK);
-          chatButton.setPrefWidth(75);
+          chatButton.setPrefWidth(150);
           chatButton.setPrefHeight(25);
           chatButton.setStyle("-fx-base: white; -fx-background-color: #FFFFFFEE;");
           chatButton.setOnMouseEntered(event -> {
@@ -545,20 +545,7 @@ public class Controller extends PlanParser implements Initializable {
                     addTasksToHBox();
                     adaptor.setDaySelected(daySelected);
                     adaptor.setDaySelectedArray(daySelected.getTimeSlots());
-//                    adaptor.getDaySelected().getTimeSlots()[0] = 1;
-//                    adaptor.getDaySelected().getTimeSlots()[1] = 1;
-//                    adaptor.getDaySelected().getTimeSlots()[2] = 1;
-//                    adaptor.getDaySelected().getTimeSlots()[3] = 1;
-//                    adaptor.getDaySelected().getTimeSlots()[4] = 1;
-//                    adaptor.getDaySelected().getTimeSlots()[5] = 1;
-//
-//                    adaptor.getDaySelected().getTimeSlots()[16] = 2;
-//                    adaptor.getDaySelected().getTimeSlots()[17] = 2;
-//                    adaptor.getDaySelected().getTimeSlots()[18] = 2;
-//                    adaptor.getDaySelected().getTimeSlots()[19] = 2;
-//                    adaptor.getDaySelected().getTimeSlots()[20] = 2;
-//                    adaptor.getDaySelected().getTimeSlots()[21] = 2;
-//                    adaptor.getDaySelected().getTimeSlots()[22] = 2;
+
                 }
             }
         });
