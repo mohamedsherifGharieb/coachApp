@@ -1628,10 +1628,29 @@ public class Main extends Application {
         //addPBtn.setDisable(true);
 
         addPBtn.setOnMouseClicked(event -> {
-            if(!pNameList.getSelectionModel().isEmpty()){
-                webengine.load(urlFinal +"/addPatient/?coachName="
-                        + adaptor.getCoach().getCoachName() + "&patientName="
-                        + pNameList.getSelectionModel().getSelectedItem().toString());
+            if (!pNameList.getSelectionModel().isEmpty()) {
+                String coachName = adaptor.getCoach().getCoachName();
+                String patientName = pNameList.getSelectionModel().getSelectedItem().toString();
+            
+                String addPatientUrl = urlFinal + "/addPatient/?coachName=" + coachName + "&patientName=" + patientName;
+                String chatUrl = urlFinal + "/Chat/?coachName=" + coachName + "&patientName=" + patientName;
+            
+                // Define the listener for when the first URL finishes loading
+                ChangeListener<Worker.State> listener = new ChangeListener<Worker.State>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+                        if (newValue == Worker.State.SUCCEEDED) {
+                            // First URL loaded successfully, now load the second URL
+                            webengine.getLoadWorker().stateProperty().removeListener(this); // Remove the listener
+                            webengine.load(chatUrl);
+                            pgRequest = "Chat";
+                        }
+                    }
+                };
+                // Add the listener to the stateProperty of the LoadWorker
+                webengine.getLoadWorker().stateProperty().addListener(listener);
+                // Load the first URL
+                webengine.load(addPatientUrl);
                 pgRequest = "addPatient";
             }
             else {

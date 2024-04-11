@@ -2,16 +2,22 @@ package sample;
 
 import com.sun.javafx.geom.AreaOp;
 //import com.sun.xml.internal.bind.util.Which;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
@@ -19,19 +25,27 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.joda.time.LocalDate;
+import org.json.JSONException;
+
 import sample.WeekPlan.*;
 import sample.utils.Adaptor;
 import sample.utils.LoadPlan;
 import sample.utils.PlanParser;
 import sample.utils.SavePlan;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,6 +55,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Controller extends PlanParser implements Initializable {
@@ -52,7 +68,9 @@ public class Controller extends PlanParser implements Initializable {
     @FXML Button removeWeekPlanButton;
     @FXML Button saveAndExitButton;
     Button emailButton;
-    Button chatButton;
+    Button chatButton;                
+
+
     Button addTaskButton = new Button("Add");
 
     Button removeTaskButton = new Button();
@@ -99,11 +117,15 @@ public class Controller extends PlanParser implements Initializable {
     int hour = calendar.get(Calendar.HOUR);
     int minute = calendar.get(Calendar.MINUTE);
     public Coach coach = new Coach();
+    
 
     public Patient patientSelected;
     public WeekPlan weekPlanSelected;
     public Day daySelected;
     public int daySelectedID;
+    public TextArea messageDisplay;
+    private Timeline timeline;
+
 
 
     DropShadow borderGlow= new DropShadow();
@@ -118,7 +140,8 @@ public class Controller extends PlanParser implements Initializable {
         weekPlanVBox.getChildren().clear();
         weekPlanVBox.getChildren().add(newWeekPlanButton);
 
-        adaptor.setCoach(coach);
+        adaptor.setCoach(coach);     
+        
 
 
         adaptor.setMainHBox(mainHBox);
@@ -154,6 +177,13 @@ public class Controller extends PlanParser implements Initializable {
         weekPlanLabel.setText("Select or Add a WeekPlan");
         sDateLabel.setText("");
         eDateLabel.setText("");
+                           
+        
+        
+        
+        
+                                                                   
+        
 
 
           // Chat Button
@@ -169,11 +199,10 @@ public class Controller extends PlanParser implements Initializable {
           chatButton.setOnMouseExited(event -> {
               chatButton.setEffect(null);
           });
-          // Add event handler for chat button
-          chatButton.setOnAction(event -> {
-              // Add your chat functionality here
-              System.out.println("Chat button clicked");
-          });
+          chatButton.setOnMouseClicked(event -> {
+            openChatWindow();
+        });
+          
           // Create HBox container
           buttonBoxChatandemail = new HBox();
           buttonBoxChatandemail.setAlignment(Pos.CENTER);
@@ -181,6 +210,7 @@ public class Controller extends PlanParser implements Initializable {
           
           // Add chat button to the HBox
           buttonBoxChatandemail.getChildren().addAll(chatButton);
+          
           
           
         
@@ -377,6 +407,7 @@ public class Controller extends PlanParser implements Initializable {
         removeWeekPlanButton.setOnMouseExited(event1 -> {
             removeWeekPlanButton.setEffect(null);
         });
+        
 
         removeTaskButton.setOnMouseEntered(event1 -> {
             removeTaskButton.setEffect(borderGlow);
@@ -932,6 +963,149 @@ public class Controller extends PlanParser implements Initializable {
         }
 
     }
+    private void openChatWindow() {
+        // Define chatbox UI components
+        startChatRefresh();
+        TextField chatInput = new TextField();
+        chatInput.setPromptText("Type a message...");
+        chatInput.setPrefWidth(200);
+        String coachName = adaptor.getPatientSelected().getCoachName();
+        String patientName = adaptor.getPatientSelected().getPatientName();
+
+        Button sendButton = new Button("Send");
+        sendButton.setOnAction(e -> {
+            String message = chatInput.getText();
+            System.out.println("Message sent: " + message);      
+             String encodedMessage = "";
+        try {
+            encodedMessage = URLEncoder.encode(message, "UTF-8");
+        } catch (UnsupportedEncodingException a) {
+            a.printStackTrace();
+            // Handle encoding exception
+        } 
+            String url = "https://server---app-d244e2f2d7c9.herokuapp.com/sendMassege/?coachName=" + coachName + "&patientName=" + patientName + "&message=" + encodedMessage;
+            sendHTTPRequestPost(url);
+            chatInput.clear();
+            refreshChat();
+        });
+    
+        messageDisplay = new TextArea();
+        messageDisplay.setEditable(false);
+        messageDisplay.setStyle("-fx-background-color: inherit;"); // Apply inline style to chat window
+        messageDisplay.setPrefWidth(250);
+        messageDisplay.setPrefHeight(150);
+    
+        HBox inputLayout = new HBox(chatInput, sendButton);
+        inputLayout.setAlignment(Pos.CENTER);
+        inputLayout.setSpacing(10);
+    
+        VBox chatboxLayout = new VBox(messageDisplay, inputLayout);
+        chatboxLayout.setAlignment(Pos.CENTER);
+        chatboxLayout.setSpacing(10);
+    
+        // Create a new stage (window) for the chatbox
+        Stage chatboxStage = new Stage();
+        chatboxStage.setTitle(adaptor.getPatientSelected().getPatientName());
+        chatboxStage.setScene(new Scene(chatboxLayout, 300, 200));
+    
+        // Set the modality of the chatbox stage to APPLICATION_MODAL
+        chatboxStage.initModality(Modality.APPLICATION_MODAL);
+    
+        // Show the chatbox stage
+        chatboxStage.show();
+        chatboxStage.setOnCloseRequest(event->stopRefresh());
+    }
+    private void startChatRefresh() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            // Send HTTP request to refresh chat
+            refreshChat();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+    private void stopRefresh() {
+        if (timeline != null) {
+            timeline.stop();
+        }
+    }
+    private void refreshChat() {
+        // Send HTTP request to the server
+        String response = sendHTTPRequest("https://server---app-d244e2f2d7c9.herokuapp.com" + "/getChat/?coachName=" + adaptor.getPatientSelected().getCoachName() + "&patientName=" + adaptor.getPatientSelected().getPatientName());
+    
+        try {
+            // Parse the JSON array
+            JSONArray jsonArray = new JSONArray(response);
+    
+            // Get the inbox array from the JSON object
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            JSONArray inboxArray = jsonObject.getJSONArray("inbox");
+    
+            // Display each sender-message pair in the message display area
+            StringBuilder formattedMessages = new StringBuilder();
+            for (int i = 0; i < inboxArray.length(); i++) {
+                String senderMessage = inboxArray.getString(i);
+                formattedMessages.append(senderMessage).append("\n");
+            }
+            messageDisplay.setText(formattedMessages.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    
+   private String sendHTTPRequest(String urlString) {
+    StringBuilder response = new StringBuilder();
+    try {
+        URL url = new URL(urlString);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+        reader.close();
+        connection.disconnect();
+    } catch (IOException e) {
+        e.printStackTrace(); // Handle the exception properly in your application
+    }
+    return response.toString();
+}
+private String sendHTTPRequestPost(String url) {
+    try {
+        // Create the URL object
+        URL requestUrl = new URL(url);
+
+        // Create the HttpURLConnection object
+        HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
+
+        // Set the request method to GET
+        connection.setRequestMethod("POST");
+
+        // Get the response code
+        int responseCode = connection.getResponseCode();
+
+        // Read the response from the server
+        StringBuilder response = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+        }
+
+        // Close the connection
+        connection.disconnect();
+
+        // Return the response
+        return response.toString();
+    } catch (IOException e) {
+        e.printStackTrace();
+        // Handle the exception as needed
+        return null;
+    }
+}
+
     public void addPatientsToVBox(){
         patientsVBox.getChildren().clear();
         patientsVBox.getChildren().add(addPatientButton);
