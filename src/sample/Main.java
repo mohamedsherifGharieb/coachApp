@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.zip.DeflaterOutputStream;
+
 
 import javafx.application.Application;
 import javafx.beans.binding.BooleanBinding;
@@ -95,12 +97,15 @@ public class Main extends Application {
 
     public void email(String masssege){
         try {
-            System.out.println("sent email");
+            System.out.print("email");
             // Construct the request URL with parameters
             String baseUrl = "https://server---app-d244e2f2d7c9.herokuapp.com";
             String coachUsername = adaptor.getPatientSelected().getCoachName();
             String patientName = adaptor.getPatientSelected().getPatientName();
-            String requestUrl = String.format("%s/sendEmailC/?coachUsername=%s&name=%s&message=%s", baseUrl, coachUsername, patientName,masssege);
+            String requestUrl = String.format("%s/sendEmailC/?coachUsername=%s&name=%s&message=%s",
+                    baseUrl, URLEncoder.encode(coachUsername, "UTF-8"),
+                    URLEncoder.encode(patientName, "UTF-8"),
+                    URLEncoder.encode(masssege, "UTF-8"));
 
             // Create a URL object
             URL url = new URL(requestUrl);
@@ -126,8 +131,8 @@ public class Main extends Application {
             connection.disconnect();
         } catch (IOException e) {
             e.printStackTrace();
-        }                
-    };
+        }
+    }
 
     public void start(Stage stage) throws Exception {
         //setting buttons effect
@@ -1305,6 +1310,7 @@ public class Main extends Application {
                         }
                         
                         if(uniqueTName || tNameField.getText().equals(oldName)){
+                            
                             adaptor.setAddTName(tNameField.getText());
                             adaptor.setAddTDescription(da.getText());
                             adaptor.setAddTSHour(sHour.getSelectionModel().getSelectedItem());
@@ -1314,12 +1320,12 @@ public class Main extends Application {
                             for(int x = 0 ; x < progsList.getItems().size(); x++){
                                 adaptor.getAddTPrograms().add(new Program(progsList.getItems().get(x).toString()));
                             }
+                            email("Changed has been made on Task:"+":"+adaptor.getTaskSelectedName());
                             progsList.getItems().clear();
                             addTStage.close();
                             adaptor.getMainHBox().setDisable(false);
                             adaptor.getEditTaskbtn().defaultButtonProperty().setValue(false);
                             adaptor.getEditTbtn().defaultButtonProperty().setValue(true);
-                            email("Changed has been made on Task:"+":"+adaptor.getTaskSelectedName());
                         }
                         else {
                             addTStage.hide();
@@ -1414,11 +1420,11 @@ public class Main extends Application {
                     for(int x = 0 ; x < progsList.getItems().size(); x++){
                         adaptor.getAddTPrograms().add(new Program(progsList.getItems().get(x).toString()));
                     }
+                    email("A new Task has been created Check the weekPlan"+":"+adaptor.getWeekPlanSelected().getWeekPlanName());
                     progsList.getItems().clear();
                     addTStage.close();
                     adaptor.getMainHBox().setDisable(false);
                     adaptor.getAddTbtn().defaultButtonProperty().setValue(true);
-                    email("A new Task has been created Check the weekPlan"+":"+adaptor.getWeekPlanSelected().getWeekPlanName());
                 }
                 else {
                     addTStage.hide();
@@ -1768,11 +1774,11 @@ public class Main extends Application {
         Scene removeWScene = new Scene(removeWVBox, 420, 178);
 
         removeWBtn.setOnMouseClicked(event -> {
+            email("weekPlan has been removed :"+""+adaptor.getWeekPlanSelected().getWeekPlanName());
             adaptor.setRemoveWplanName(wRNameLabel.getText());
             adaptor.getMainHBox().setDisable(false);
             removeWStage.close();
             adaptor.getRemoveWbtn().defaultButtonProperty().setValue(true);
-            email("weekPlan has been removed :"+""+adaptor.getWeekPlanSelected().getWeekPlanName());
         });
         removeWBtn.setOnMouseEntered(event -> {
             removeWBtn.setEffect(borderGlow);
@@ -2073,12 +2079,12 @@ public class Main extends Application {
                 adaptor.setsDaySelected(datePicker.getValue().getDayOfMonth());
                 adaptor.setsMonthSelected(datePicker.getValue().getMonthValue());
                 adaptor.setsYearSelected(datePicker.getValue().getYear());
+                email("weekPlan has been added : "+ " "+ wPNameField.getText());
                 adaptor.getMainHBox().setDisable(false);
                 adaptor.getNewWbtn().defaultButtonProperty().setValue(true);
                 wPNameField.setText("");
                 datePicker.setValue(null);
                 newWStage.close();
-                email("weekPlan has been added :"+""+adaptor.getWeekPlanSelected().getWeekPlanName());
             }
             else{
                 newWStage.hide();
