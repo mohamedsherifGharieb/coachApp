@@ -149,8 +149,8 @@ public class Main extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(new Scene(root));
         stage.centerOnScreen();
-        stage.setWidth(1003);
-        stage.setHeight(660);
+        stage.setWidth(1259.0);
+        stage.setHeight(649.0);
 
         //webView to connect to server
         WebView web = new WebView();
@@ -2162,7 +2162,6 @@ public class Main extends Application {
         webengine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
             public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
                 if (newState == Worker.State.SUCCEEDED) {
-                    //System.out.println(webengine.getDocument().getDocumentElement().getTextContent());
                     switch (pgRequest){
                         case "coachSignup":
                         	
@@ -2308,7 +2307,6 @@ public class Main extends Application {
                             }
                             break;
                         case "setPatientFile":
-                            
                             if(setFiles.equals("?fileSetSuccess?")){
                             	System.out.println("saved files");
                                 stage.close();

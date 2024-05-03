@@ -18,9 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-/**
- * Created by Johnny Bishara on 29/03/2016.
- */
+
 public class Adaptor {
     DropShadow borderGlow= new DropShadow();
     Calendar calendar = Calendar.getInstance();
@@ -43,8 +41,8 @@ public class Adaptor {
 
     private HBox mainHBox;
     private HBox tasksHBox;
-    private VBox weekPlanVBox;
-    private VBox patientsVBox;
+    private HBox weekPlanVBox;
+    private HBox patientsVBox;
     private HBox weekPlanHBox;
 
     public VBox getFullWeekPlanVBox() {
@@ -196,19 +194,19 @@ public class Adaptor {
         this.tasksHBox = tasksHBox;
     }
 
-    public VBox getWeekPlanVBox() {
+    public HBox getWeekPlanVBox() {
         return weekPlanVBox;
     }
 
-    public void setWeekPlanVBox(VBox weekPlanVBox) {
+    public void setWeekPlanVBox(HBox weekPlanVBox) {
         this.weekPlanVBox = weekPlanVBox;
     }
 
-    public VBox getPatientsVBox() {
+    public HBox getPatientsVBox() {
         return patientsVBox;
     }
 
-    public void setPatientsVBox(VBox patientsVBox) {
+    public void setPatientsVBox(HBox patientsVBox) {
         this.patientsVBox = patientsVBox;
     }
 
@@ -549,7 +547,6 @@ public class Adaptor {
 
     public void addPatientsToVBox(){
         int depth = 35;
-
         borderGlow.setOffsetY(0f);
         borderGlow.setOffsetX(0f);
         borderGlow.setColor(Color.WHITE);

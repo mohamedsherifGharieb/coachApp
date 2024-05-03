@@ -89,9 +89,9 @@ public class Controller extends PlanParser implements Initializable {
     @FXML ToggleButton Sunday;
 
     @FXML HBox mainHBox;
-    @FXML VBox weekPlanVBox;
+    @FXML HBox weekPlanVBox;
     @FXML HBox weekPlanHBox;
-    @FXML VBox patientsVBox;
+    @FXML HBox patientsVBox;
     @FXML HBox tasksHBox;
     @FXML HBox daysHBox;
     @FXML VBox fullWeekPlanVBox;
@@ -142,8 +142,6 @@ public class Controller extends PlanParser implements Initializable {
 
         adaptor.setCoach(coach);     
         
-
-
         adaptor.setMainHBox(mainHBox);
         adaptor.setFullWeekPlanVBox(fullWeekPlanVBox);
         adaptor.setAddPatientButton(addPatientButton);

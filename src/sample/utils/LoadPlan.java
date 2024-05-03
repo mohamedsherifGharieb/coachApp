@@ -64,7 +64,13 @@ public class LoadPlan extends Coach {
                         day.setID(dayID);
                         System.out.println(dayName);
                         String dayProgress = (String) factObj.get("dayProgress");
-                        day.setDayProgress(Double.parseDouble(dayProgress));
+                        try {
+                            String trimmedDayProgress = dayProgress.trim();
+                            day.setDayProgress(Double.parseDouble(trimmedDayProgress));
+                        } catch (NumberFormatException e) {
+                            System.err.println("Failed to parse dayProgress: " + dayProgress);
+                            e.printStackTrace();
+                        }
                         String totalTasksDration = (String) factObj.get("totalTasksDration");
                         day.setTotalTasksDuration(Integer.parseInt(totalTasksDration));
                         String numberOfTasks = (String) factObj.get("numberOfTasks");

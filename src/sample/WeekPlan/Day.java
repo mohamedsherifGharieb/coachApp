@@ -58,7 +58,7 @@ public class Day extends WeekPlan{
 		this.dayID = Integer.parseInt(id);
 		//this.cal = cal; // i do not create a day with instance calendar anymore
 		this.tasks = new ArrayList<Task>();
-		this.dayProgress = 0;
+		this.dayProgress = 0.0;
 	}
 	public Day(){
 		this.tasks = new ArrayList<Task>();
