@@ -145,7 +145,14 @@ public class Main extends Application {
         borderGlow.setHeight(depth);
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        root.setStyle("-fx-accent: lightblue;-fx-focus-color: lightblue;");
+        root.setStyle(
+    "-fx-background-color: #EAEEF4; " + 
+    "-fx-border-color: #103F66; " +
+    "-fx-border-width: 5px; " +
+    "-fx-border-radius: 10px; " +
+    "-fx-effect: dropshadow(three-pass-box, #103F66, 10, 0, 0, 0); " +
+    "overflow: hidden;"
+);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(new Scene(root));
         stage.centerOnScreen();

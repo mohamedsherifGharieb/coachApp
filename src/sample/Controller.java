@@ -20,6 +20,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -68,7 +71,7 @@ public class Controller extends PlanParser implements Initializable {
     @FXML Button removeWeekPlanButton;
     @FXML Button saveAndExitButton;
     Button emailButton;
-    Button chatButton;                
+    @FXML Button chatButton;                
 
 
     Button addTaskButton = new Button("Add");
@@ -89,7 +92,7 @@ public class Controller extends PlanParser implements Initializable {
     @FXML ToggleButton Sunday;
 
     @FXML HBox mainHBox;
-    @FXML HBox weekPlanVBox;
+    @FXML VBox weekPlanVBox;
     @FXML HBox weekPlanHBox;
     @FXML HBox patientsVBox;
     @FXML HBox tasksHBox;
@@ -135,14 +138,13 @@ public class Controller extends PlanParser implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         addTaskButton.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         patientsVBox.getChildren().clear();
-        patientsVBox.getChildren().add(addPatientButton);
 
         weekPlanVBox.getChildren().clear();
-        weekPlanVBox.getChildren().add(newWeekPlanButton);
 
         adaptor.setCoach(coach);     
-        
+
         adaptor.setMainHBox(mainHBox);
+        fullWeekPlanVBox.setMaxHeight(10); 
         adaptor.setFullWeekPlanVBox(fullWeekPlanVBox);
         adaptor.setAddPatientButton(addPatientButton);
         adaptor.setAddTaskButton(addTaskButton);
@@ -152,6 +154,7 @@ public class Controller extends PlanParser implements Initializable {
         adaptor.setRemovePatientButton(removePatientButton);
         adaptor.setRemoveTaskButton(removeTaskButton);
         adaptor.setRemoveWeekPlanButton(removeWeekPlanButton);
+        tasksHBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
         adaptor.setTasksHBox(tasksHBox);
         adaptor.setWeekPlanHBox(weekPlanHBox);
         adaptor.setWeekPlanVBox(weekPlanVBox);
@@ -164,6 +167,7 @@ public class Controller extends PlanParser implements Initializable {
         adaptor.setWeekPlanSelected(weekPlanSelected);
 
         weekPlanVBox.setDisable(true);
+        newWeekPlanButton.setDisable(true);
         removeWeekPlanButton.setDisable(true);
         tasksVBox.setDisable(true);
         daysHBox.setDisable(true);
@@ -173,6 +177,9 @@ public class Controller extends PlanParser implements Initializable {
         adaptor.getRemoveTaskButton().setDisable(true);
 
         weekPlanLabel.setText("Select or Add a WeekPlan");
+        weekPlanLabel.setStyle("-fx-text-fill: #103F66;");
+
+
         sDateLabel.setText("");
         eDateLabel.setText("");
                            
@@ -180,23 +187,7 @@ public class Controller extends PlanParser implements Initializable {
         
         
         
-                                                                   
-        
-
-
-          // Chat Button
-          chatButton = new Button("Chat");
-          chatButton.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
-          chatButton.setTextFill(Color.BLACK);
-          chatButton.setPrefWidth(150);
-          chatButton.setPrefHeight(25);
-          chatButton.setStyle("-fx-base: white; -fx-background-color: #FFFFFFEE;");
-          chatButton.setOnMouseEntered(event -> {
-              chatButton.setEffect(borderGlow);
-          });
-          chatButton.setOnMouseExited(event -> {
-              chatButton.setEffect(null);
-          });
+                            
           chatButton.setOnMouseClicked(event -> {
             openChatWindow();
         });
@@ -207,7 +198,6 @@ public class Controller extends PlanParser implements Initializable {
           buttonBoxChatandemail.setSpacing(1); // Set spacing between buttons
           
           // Add chat button to the HBox
-          buttonBoxChatandemail.getChildren().addAll(chatButton);
           
           
           
@@ -218,10 +208,26 @@ public class Controller extends PlanParser implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue){
-                    Monday.setStyle("-fx-background-color:  #EF973944");
+                    Monday.setStyle("-fx-background-color: #EF9739EE;"+
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
                 else {
-                    Monday.setStyle("-fx-background-color:  #EF9739EE");
+                    Monday.setStyle("-fx-background-color: #103F66; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
             }
         });
@@ -231,10 +237,26 @@ public class Controller extends PlanParser implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(newValue){
-                    Tuesday.setStyle("-fx-background-color:  #EF973944");
+                    Tuesday.setStyle("-fx-background-color: #EF9739EE; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
                 else {
-                    Tuesday.setStyle("-fx-background-color:  #EF9739EE");
+                    Tuesday.setStyle("-fx-background-color: #103F66; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
             }
         });
@@ -244,10 +266,26 @@ public class Controller extends PlanParser implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(newValue){
-                    Wednesday.setStyle("-fx-background-color:  #EF973944");
+                    Wednesday.setStyle("-fx-background-color: #EF9739EE; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
                 else {
-                    Wednesday.setStyle("-fx-background-color:  #EF9739EE");
+                    Wednesday.setStyle("-fx-background-color: #103F66; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
             }
         });
@@ -257,10 +295,26 @@ public class Controller extends PlanParser implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(newValue){
-                    Thursday.setStyle("-fx-background-color:  #EF973944");
+                    Thursday.setStyle("-fx-background-color: #EF9739EE; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
                 else {
-                    Thursday.setStyle("-fx-background-color:  #EF9739EE");
+                    Thursday.setStyle("-fx-background-color: #103F66; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
             }
         });
@@ -270,10 +324,26 @@ public class Controller extends PlanParser implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(newValue) {
-                    Friday.setStyle("-fx-background-color:  #EF973944");
+                    Friday.setStyle("-fx-background-color: #EF9739EE; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
                 }
                 else {
-                    Friday.setStyle("-fx-background-color:  #EF9739EE");
+                    Friday.setStyle("-fx-background-color: #103F66; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;" +
+                    "-fx-min-height: 35; " + 
+                    "-fx-pref-height: 35;");
                 }
             }
         });
@@ -283,10 +353,26 @@ public class Controller extends PlanParser implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(newValue) {
-                    Saturday.setStyle("-fx-background-color:  #EF973944");
+                    Saturday.setStyle("-fx-background-color: #EF9739EE; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " + 
+                    "-fx-pref-height: 35;");
                 }
                 else {
-                    Saturday.setStyle("-fx-background-color:  #EF9739EE");
+                    Saturday.setStyle("-fx-background-color: #103F66; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " + 
+                    "-fx-pref-height: 35;");
                 }
             }
         });
@@ -296,10 +382,26 @@ public class Controller extends PlanParser implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(newValue) {
-                    Sunday.setStyle("-fx-background-color:  #EF973944");
+                    Sunday.setStyle("-fx-background-color: #EF9739EE; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " + 
+                    "-fx-pref-height: 35;");
                 }
                 else {
-                    Sunday.setStyle("-fx-background-color:  #EF9739EE");
+                    Sunday.setStyle("-fx-background-color: #103F66; " +
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " + 
+                    "-fx-pref-height: 35;");
                 }
             }
         });
@@ -392,6 +494,7 @@ public class Controller extends PlanParser implements Initializable {
         });
 
         removePatientButton.setDisable(true);
+        chatButton.setDisable(true);
         removePatientButton.setOnMouseEntered(event1 -> {
             removePatientButton.setEffect(borderGlow);
         });
@@ -480,9 +583,10 @@ public class Controller extends PlanParser implements Initializable {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if(newValue==null) {
                     removePatientButton.setDisable(true);
+                    chatButton.setDisable(true);
+                    newWeekPlanButton.setDisable(true);
                     removeWeekPlanButton.setDisable(true);
                     chatButton.setVisible(true);
-                    emailButton.setVisible(true);
                     tasksVBox.setDisable(true);
                     daysHBox.setDisable(true);
                     toggleDays.selectToggle(null);
@@ -495,18 +599,20 @@ public class Controller extends PlanParser implements Initializable {
                     //adaptor.setRemovePatientButton(removePatientButton);
                     weekPlanVBox.setDisable(true);
                     weekPlanVBox.getChildren().clear();
-                    weekPlanVBox.getChildren().add(adaptor.getNewWeekPlanButton());
                     toggleDays.selectToggle(null);
                     adaptor.setPatientSelected(null);
                     overPerfButton.setDisable(true);
                     adaptor.getOverPerfButton().setDisable(true);
                 }
                 else {
+                    chatButton.setDisable(false);
                     overPerfButton.setDisable(false);
                     adaptor.getOverPerfButton().setDisable(false);
                     removePatientButton.setDisable(false);
                     adaptor.getRemovePatientButton().setDisable(false);
                     weekPlanVBox.setDisable(false);
+                    newWeekPlanButton.setDisable(false);
+
                     patientSelected = coach.getPatientByName(togglePatients.getSelectedToggle().getUserData()+ "");
 
                     adaptor.setPatientSelected(patientSelected);
@@ -733,11 +839,10 @@ public class Controller extends PlanParser implements Initializable {
     }
     public void addTasksToHBox(){
         tasksHBox.getChildren().clear();
+        tasksHBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
         if(weekPlanSelected != null) {
             daySelected = weekPlanSelected.days.get((int) toggleDays.getSelectedToggle().getUserData() - 1);
             daySelectedID = daySelected.getDayID();
-            System.out.println(daySelected.tasks.size());
-
             addTaskButton.setMinSize(100,100);
             addTaskButton.setStyle("-fx-base: white; -fx-background-color: #FFFFFFEE;");
             addTaskButton.setOnMouseEntered(event -> {
@@ -754,8 +859,8 @@ public class Controller extends PlanParser implements Initializable {
             addTaskVBox.getChildren().add(addTaskButton);
             addTaskVBox.setStyle("-fx-background-color: #a5b0b0;-fx-border-color: black");
             tasksHBox.getChildren().add(addTaskVBox);
+            tasksHBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
             for (int t = 0; t < daySelected.tasks.size(); t++) {
-                //task Name
                 Label taskName = new Label(daySelected.tasks.get(t).getTaskName());
                 taskName.setTextAlignment(TextAlignment.CENTER);
                 taskName.setAlignment(Pos.CENTER);
@@ -1106,7 +1211,6 @@ private String sendHTTPRequestPost(String url) {
 
     public void addPatientsToVBox(){
         patientsVBox.getChildren().clear();
-        patientsVBox.getChildren().add(addPatientButton);
         for(int x = 0; x < coach.patients.size(); x++) {
             if (!coach.patients.get(x).getPatientName().equals("")) {
                 ToggleButton patientName = new ToggleButton(coach.patients.get(x).getPatientName());
@@ -1116,21 +1220,42 @@ private String sendHTTPRequestPost(String url) {
                 patientName.setTextAlignment(TextAlignment.CENTER);
                 patientName.setAlignment(Pos.CENTER);
                 patientName.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 12));
-                patientName.setStyle("-fx-base: white; -fx-background-color: #FFFFFFAA");
+                patientName.setStyle("-fx-background-color: #103F66; " +
+                "-fx-border-width: 2px; " +
+                "-fx-border-radius: 20px; " +
+                "-fx-background-radius: 20px; " +
+                "-fx-border-style: solid; " +
+                "-fx-border-color: #000000; " +
+                "-fx-text-fill: white; " 
+                );
                 patientName.setContentDisplay(ContentDisplay.CENTER);
                 patientName.setPrefWidth(Control.USE_COMPUTED_SIZE);
                 patientName.setPrefSize(155, 45);
                 patientName.setMinSize(155, 45);
                 patientName.setMaxSize(155, 45);
-                patientName.setToggleGroup(togglePatients);
+                patientName.setToggleGroup(togglePatients); //ana hena
                 patientName.selectedProperty().addListener(new ChangeListener<Boolean>() {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         if(newValue){
-                            patientName.setStyle("-fx-background-color:  #FFFFFF44");
+                            patientName.setStyle("-fx-background-color: #103F66; " +
+                            "-fx-border-width: 2px; " +
+                            "-fx-border-radius: 20px; " +
+                            "-fx-background-radius: 20px; " +
+                            "-fx-border-style: solid; " +
+                            "-fx-border-color: #000000; " +
+                            "-fx-text-fill: white; " 
+                            );
                         }
                         else {
-                            patientName.setStyle("-fx-background-color:  #FFFFFFEE");
+                            patientName.setStyle("-fx-background-color: #103F66; " +
+                            "-fx-border-width: 2px; " +
+                            "-fx-border-radius: 20px; " +
+                            "-fx-background-radius: 20px; " +
+                            "-fx-border-style: solid; " +
+                            "-fx-border-color: #000000; " +
+                            "-fx-text-fill: white; " 
+                            );
                         }
                     }
                 });
@@ -1140,6 +1265,9 @@ private String sendHTTPRequestPost(String url) {
                 patientName.setOnMouseExited(event -> {
                     patientName.setEffect(null);
                 });
+                patientsVBox.setStyle("-fx-padding: 10 0 0 10;");
+                patientsVBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
+                patientsVBox.setSpacing(10);
                 patientsVBox.getChildren().add(patientName);
             }
         }
@@ -1156,8 +1284,7 @@ private String sendHTTPRequestPost(String url) {
 
     public void addWeekPlansToVBox(){
         weekPlanVBox.getChildren().clear();
-        weekPlanVBox.getChildren().addAll(buttonBoxChatandemail,newWeekPlanButton);
-        System.out.println("from controller: weekplans number: " + adaptor.getPatientSelected().plans.size() );
+        weekPlanVBox.getChildren().addAll();
         for(int x = 0; x < adaptor.getPatientSelected().plans.size(); x++){
             ToggleButton weekPlanName = new ToggleButton(patientSelected.plans.get(x).getWeekPlanName());
             coach.getPatientByName(patientSelected.getPatientName()).plans.get(x).setWeekPlanID(x+1);
@@ -1165,7 +1292,15 @@ private String sendHTTPRequestPost(String url) {
             weekPlanName.setTextAlignment(TextAlignment.CENTER);
             weekPlanName.setAlignment(Pos.CENTER);
             weekPlanName.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 12));
-            weekPlanName.setStyle("-fx-base: white; -fx-background-color: #FFFFFFAA");
+            weekPlanName.setStyle("-fx-background-color: #103F66; " +
+            "-fx-border-width: 2px; " +
+            "-fx-border-radius: 20px; " +
+            "-fx-background-radius: 20px; " +
+            "-fx-border-style: solid; " +
+            "-fx-border-color: #000000; " +
+            "-fx-text-fill: white; " +
+            "-fx-min-height: 35; " +  
+            "-fx-pref-height: 35;");
             weekPlanName.setContentDisplay(ContentDisplay.CENTER);
             weekPlanName.setPrefWidth(Control.USE_COMPUTED_SIZE);
             weekPlanName.setPrefSize(155, 45);
@@ -1182,14 +1317,37 @@ private String sendHTTPRequestPost(String url) {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     if(newValue){
-                        weekPlanName.setStyle("-fx-background-color: #FFFFFF44");
+                        weekPlanName.setStyle("-fx-background-color: #008000; " +
+                        "-fx-border-width: 2px; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-border-style: solid; " +
+                        "-fx-border-color: #000000; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-min-height: 35; " +  
+                        "-fx-pref-height: 35;");
                     }
                     else {
-                        weekPlanName.setStyle("-fx-background-color: #FFFFFFEE");
+                        weekPlanName.setStyle("-fx-background-color: #103F66; " +
+                        "-fx-border-width: 2px; " +
+                        "-fx-border-radius: 20px; " +
+                        "-fx-background-radius: 20px; " +
+                        "-fx-border-style: solid; " +
+                        "-fx-border-color: #000000; " +
+                        "-fx-text-fill: white; " +
+                        "-fx-min-height: 35; " +  
+                        "-fx-pref-height: 35;");
                     }
                 }
             });
+            // Set background color programmatically
+            weekPlanVBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
+            weekPlanVBox.setPadding(new Insets(10)); 
+            weekPlanVBox.setAlignment(Pos.TOP_CENTER);
+            weekPlanVBox.setSpacing(10);
             weekPlanVBox.getChildren().add(weekPlanName);
+            weekPlanVBox.setStyle("-fx-border-color: transparent transparent transparent #103F66; -fx-border-width: 2px;");
+
         }
 
         ObservableList<Node> weekPlans = weekPlanVBox.getChildren();

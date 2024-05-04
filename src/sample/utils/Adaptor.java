@@ -3,6 +3,7 @@ package sample.utils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -41,7 +42,7 @@ public class Adaptor {
 
     private HBox mainHBox;
     private HBox tasksHBox;
-    private HBox weekPlanVBox;
+    private VBox weekPlanVBox;
     private HBox patientsVBox;
     private HBox weekPlanHBox;
 
@@ -194,11 +195,11 @@ public class Adaptor {
         this.tasksHBox = tasksHBox;
     }
 
-    public HBox getWeekPlanVBox() {
+    public VBox getWeekPlanVBox() {
         return weekPlanVBox;
     }
 
-    public void setWeekPlanVBox(HBox weekPlanVBox) {
+    public void setWeekPlanVBox(VBox weekPlanVBox) {
         this.weekPlanVBox = weekPlanVBox;
     }
 
@@ -347,8 +348,6 @@ public class Adaptor {
                                 || item.getDayOfWeek() != DayOfWeek.MONDAY
                                 || ((today == item.getDayOfMonth()) && month == item.getMonthValue() && year == item.getYear())
                                 || item.isBefore(local)) {
-                            System.out.println(item + "<<<<<<<");
-                            System.out.println(patientSelected.plans.get(h).getWeekPlanSDate() + ">>>>>>>>>>>");
                             setDisable(true);
                         }
                     }
@@ -553,17 +552,22 @@ public class Adaptor {
         borderGlow.setWidth(depth);
         borderGlow.setHeight(depth);
         patientsVBox.getChildren().clear();
-        patientsVBox.getChildren().add(addPatientButton);
 
         for(int x = 0; x < coach.patients.size(); x++){
             ToggleButton patientName = new ToggleButton(coach.patients.get(x).getPatientName());
-            coach.patients.get(x).setPatientID(x+1);  //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<change id to the one from postres
-            //System.out.println(coach.getPatientByName(coach.patients.get(x).getPatientName()));
+            coach.patients.get(x).setPatientID(x+1);  
+
             patientName.setUserData(coach.patients.get(x).getPatientName());
             patientName.setTextAlignment(TextAlignment.CENTER);
             patientName.setAlignment(Pos.CENTER);
             patientName.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 12));
-            patientName.setStyle("-fx-base: white; -fx-background-color: #FFFFFFAA");
+            patientName.setStyle("-fx-background-color: #103F66; " +
+                     "-fx-border-width: 2px; " +
+                     "-fx-border-radius: 20px; " +
+                     "-fx-background-radius: 20px; " +
+                     "-fx-border-style: solid; " +
+                     "-fx-border-color: #000000; " +
+                     "-fx-text-fill: white;");           
             patientName.setContentDisplay(ContentDisplay.CENTER);
             patientName.setPrefWidth(Control.USE_COMPUTED_SIZE);
             patientName.setPrefSize(155, 45);
@@ -574,10 +578,22 @@ public class Adaptor {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     if(newValue){
-                        patientName.setStyle("-fx-background-color:  #FFFFFF44");
+                        patientName.setStyle("-fx-background-color: #008000; " +
+                     "-fx-border-width: 2px; " +
+                     "-fx-border-radius: 20px; " +
+                     "-fx-background-radius: 20px; " +
+                     "-fx-border-style: solid; " +
+                     "-fx-border-color: #000000; " +
+                     "-fx-text-fill: white;"); 
                     }
                     else {
-                        patientName.setStyle("-fx-background-color:  #FFFFFFEE");
+                        patientName.setStyle("-fx-background-color: #103F66; " +
+                     "-fx-border-width: 2px; " +
+                     "-fx-border-radius: 20px; " +
+                     "-fx-background-radius: 20px; " +
+                     "-fx-border-style: solid; " +
+                     "-fx-border-color: #000000; " +
+                     "-fx-text-fill: white;"); 
                     }
                 }
             });
@@ -587,6 +603,10 @@ public class Adaptor {
             patientName.setOnMouseExited(event -> {
                 patientName.setEffect(null);
             });
+
+            patientsVBox.setStyle("-fx-padding: 10 0 0 10;");
+            patientsVBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
+            patientsVBox.setSpacing(10);
             patientsVBox.getChildren().add(patientName);
         }
         ObservableList<Node> patients = patientsVBox.getChildren();

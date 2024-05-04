@@ -10,112 +10,112 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<HBox fx:id="mainHBox" 
-      prefHeight="1000" 
-      prefWidth="2500" 
-      stylesheets="@../style.css"
-      xmlns="http://javafx.com/javafx/21" 
-      xmlns:fx="http://javafx.com/fxml/1"  
-      fx:controller="sample.Controller">   <children>
-      <VBox prefHeight="639.0" prefWidth="278.0">
-         <children>
-            <AnchorPane id="side_ankerpane" fx:id="side_ankerpane" prefHeight="639.0" prefWidth="237.0" styleClass="side_ankerpane" stylesheets="@style.css">
-               <children>
-                  <Pane layoutX="19.0" layoutY="14.0" prefHeight="78.0" prefWidth="241.0" styleClass="inner_pane">
-                     <children>
-                        <Pane layoutX="-1.0" prefHeight="78.0" prefWidth="241.0" />
-                     </children>
-                  </Pane>
-                  <Button fx:id="removePatientButton" layoutX="18.0" layoutY="513.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="LOGOUT" text="RemovePatient" textFill="#eeeeee" />
-                  <Button layoutX="18.0" layoutY="109.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="Chat" textFill="#eeeeee" />
-                  <Button fx:id="removeWeekPlanButton" layoutX="18.0" layoutY="171.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="RemoveWeek" textFill="#eeeeee" />
-                  <Button fx:id="newWeekPlanButton" layoutX="18.0" layoutY="234.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="NewWeek" textFill="#eeeeee" />
-                  <Button fx:id="addPatientButton" layoutX="18.0" layoutY="299.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="AddPatient" textFill="#eeeeee" />
-                  <Button fx:id="saveAndExitButton" layoutX="19.0" layoutY="579.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" text="Close" textFill="#eeeeee">
-                     <styleClass>
-                        <String fx:value="inner_pane" />
-                        <String fx:value="LOGOUT" />
-                     </styleClass>
-                  </Button>
-                  <Button fx:id="overPerfButton" layoutX="18.0" layoutY="361.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="Overall Performance" textFill="#eeeeee" />
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
-      <Pane prefHeight="639.0" prefWidth="972.0">
-         <children>
-            <ScrollPane fx:id="patientsScroll" layoutY="411.0" prefHeight="228.0" prefWidth="681.0">
-               <content>
-                  <HBox fx:id="patientsVBox" prefHeight="224.0" prefWidth="678.0" />
-               </content>
-            </ScrollPane>
-            <Pane layoutX="681.0" layoutY="412.0" prefHeight="228.0" prefWidth="292.0">
-               <children>
-                  <HBox fx:id="weekPlanVBox" layoutX="-1.0" layoutY="-1.0" prefHeight="228.0" prefWidth="292.0" />
-               </children>
-            </Pane>
-            <VBox fx:id="fullWeekPlanVBox" prefHeight="413.0" prefWidth="972.0">
-               <children>
-                  <VBox fx:id="weekTitleVBox" prefHeight="41.0" prefWidth="972.0">
-                     <children>
-                        <HBox fx:id="weekPlanHBox" prefHeight="72.0" prefWidth="972.0">
-                           <children>
-                              <Label fx:id="weekPlanLabel" alignment="CENTER" cache="true" prefHeight="41.0" prefWidth="972.0" styleClass="weekplan_label" text="WeekPlan">
-                                 <font>
-                                    <Font name="Arial Black" size="28.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="23.0" prefWidth="971.0">
-                           <children>
-                              <HBox prefHeight="24.0" prefWidth="177.0">
-                                 <children>
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="68.0" prefWidth="271.0" text="Start Date: " textFill="#103f66" />
-                                    <Label fx:id="sDateLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="233.0" text="31/12/2025" textFill="#103f66" />
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="24.0" prefWidth="185.0">
-                                 <children>
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="24.0" prefWidth="306.0" text="End Date: " textFill="#103f66" />
-                                    <Label fx:id="eDateLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="97.0" prefWidth="260.0" text="31/12/2025" textFill="#103f66" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <HBox fx:id="daysHBox" alignment="CENTER" prefHeight="51.0" prefWidth="972.0">
-                     <children>
-                        <Pane prefHeight="51.0" prefWidth="11.0" />
-                        <ToggleButton fx:id="Monday" mnemonicParsing="false" prefHeight="45.0" prefWidth="127.0" styleClass="inner_pane" text="Monday" textFill="WHITE" />
-                        <Pane prefHeight="51.0" prefWidth="11.0" />
-                        <ToggleButton fx:id="Tuesday" lineSpacing="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="128.0" styleClass="inner_pane" text="Tuesday" textFill="WHITE" />
-                        <Pane prefHeight="51.0" prefWidth="11.0" />
-                        <ToggleButton fx:id="Wednesday" mnemonicParsing="false" prefHeight="45.0" prefWidth="128.0" styleClass="inner_pane" text="Wednesday" textFill="WHITE" />
-                        <Pane prefHeight="51.0" prefWidth="11.0" />
-                        <ToggleButton fx:id="Thursday" mnemonicParsing="false" prefHeight="45.0" prefWidth="129.0" styleClass="inner_pane" text="thursday" textFill="WHITE" />
-                        <Pane prefHeight="51.0" prefWidth="11.0" />
-                        <ToggleButton fx:id="Friday" mnemonicParsing="false" prefHeight="46.0" prefWidth="129.0" styleClass="inner_pane" text="Friday" textFill="WHITE" />
-                        <Pane prefHeight="51.0" prefWidth="11.0" />
-                        <ToggleButton fx:id="Saturday" mnemonicParsing="false" prefHeight="45.0" prefWidth="129.0" styleClass="inner_pane" text="Saturday" textFill="WHITE" />
-                        <Pane prefHeight="51.0" prefWidth="11.0" />
-                        <ToggleButton fx:id="Sunday" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="44.0" prefWidth="129.0" styleClass="inner_pane" text="Sunday" textFill="WHITE" />
-                        <Pane prefHeight="51.0" prefWidth="11.0" />
-                     </children>
-                  </HBox>
-                  <VBox fx:id="tasksVBox" prefHeight="304.0" prefWidth="972.0">
-                     <children>
-                        <ScrollPane prefHeight="306.0" prefWidth="972.0">
-                           <content>
-                              <HBox fx:id="tasksHBox" prefHeight="302.0" prefWidth="970.0" />
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </children>
-      </Pane>
-   </children>
+
+<HBox fx:id="mainHBox" prefHeight="639.0" prefWidth="1251.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">   <children>
+   <VBox prefHeight="639.0" prefWidth="278.0" styleClass="background-color" stylesheets="@style.css">
+      <children>
+         <AnchorPane id="side_ankerpane" fx:id="side_ankerpane" prefHeight="639.0" prefWidth="237.0" styleClass="side_ankerpane" stylesheets="@style.css">
+            <children>
+               <Pane layoutX="19.0" layoutY="14.0" prefHeight="78.0" prefWidth="241.0" styleClass="inner_pane">
+                  <children>
+                     <Pane layoutX="-1.0" prefHeight="78.0" prefWidth="241.0" />
+                  </children>
+               </Pane>
+               <Button fx:id="removePatientButton" layoutX="18.0" layoutY="513.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="LOGOUT" text="RemovePatient" textFill="#eeeeee" />
+               <Button fx:id="chatButton" layoutX="18.0" layoutY="109.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="Chat" textFill="#eeeeee" />
+               <Button fx:id="removeWeekPlanButton" layoutX="18.0" layoutY="171.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="RemoveWeek" textFill="#eeeeee" />
+               <Button fx:id="newWeekPlanButton" layoutX="18.0" layoutY="234.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="NewWeek" textFill="#eeeeee" />
+               <Button fx:id="addPatientButton" layoutX="18.0" layoutY="299.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="AddPatient" textFill="#eeeeee" />
+               <Button fx:id="saveAndExitButton" layoutX="19.0" layoutY="579.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" text="Close" textFill="#eeeeee">
+                  <styleClass>
+                     <String fx:value="inner_pane" />
+                     <String fx:value="LOGOUT" />
+                  </styleClass>
+               </Button>
+               <Button fx:id="overPerfButton" layoutX="18.0" layoutY="361.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="241.0" styleClass="inner_pane" text="Overall Performance" textFill="#eeeeee" />
+            </children>
+         </AnchorPane>
+      </children>
+   </VBox>
+   <Pane prefHeight="639.0" prefWidth="972.0" styleClass="background-color" stylesheets="@style.css">
+      <children>
+         <ScrollPane fx:id="patientsScroll" layoutY="411.0" prefHeight="228.0" prefWidth="681.0" styleClass="background-color" stylesheets="@style.css">
+            <content>
+               <HBox fx:id="patientsVBox" prefHeight="226.0" prefWidth="679.0" styleClass="background-color" />
+            </content>
+         </ScrollPane>
+         <Pane layoutX="681.0" layoutY="405.0" prefHeight="228.0" prefWidth="292.0">
+            <children>
+                  <Label fx:id="weekPlanLabel11" alignment="CENTER" cache="true" prefHeight="42.0" prefWidth="292.0" styleClass="weekplan_label" stylesheets="@style.css" text="WeekPlans">
+                     <font>
+                        <Font name="Arial Black" size="28.0" />
+                     </font>
+                  </Label>
+               <VBox fx:id="weekPlanVBox" layoutX="-1.0" layoutY="35.0" prefHeight="192.0" prefWidth="292.0" styleClass="background-color" stylesheets="@style.css" />
+            </children>
+         </Pane>
+         <VBox fx:id="fullWeekPlanVBox" prefHeight="405.0" prefWidth="972.0" styleClass="background-color border" stylesheets="@style.css">
+            <children>
+               <VBox fx:id="weekTitleVBox" prefHeight="35.0" prefWidth="972.0" styleClass="background-color border" stylesheets="@style.css">
+                  <children>
+                     <HBox fx:id="weekPlanHBox" prefHeight="72.0" prefWidth="972.0" styleClass="background-color border" stylesheets="@style.css">
+                        <children>
+                           <Label fx:id="weekPlanLabel" alignment="CENTER" cache="true" prefHeight="35.0" prefWidth="972.0" styleClass="weekplan_label" stylesheets="@style.css" text="WeekPlan">
+                              <font>
+                                 <Font name="Arial Black" size="28.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
+                     <HBox alignment="CENTER" prefHeight="23.0" prefWidth="971.0">
+                        <children>
+                           <HBox prefHeight="24.0" prefWidth="177.0">
+                              <children>
+                                 <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="68.0" prefWidth="271.0" text="Start Date: " textFill="#103f66" />
+                                 <Label fx:id="sDateLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="233.0" text="31/12/2025" textFill="#103f66" />
+                              </children>
+                           </HBox>
+                           <HBox prefHeight="24.0" prefWidth="185.0">
+                              <children>
+                                 <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="24.0" prefWidth="306.0" text="End Date: " textFill="#103f66" />
+                                 <Label fx:id="eDateLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="97.0" prefWidth="260.0" text="31/12/2025" textFill="#103f66" />
+                              </children>
+                           </HBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+               <HBox fx:id="daysHBox" alignment="CENTER" prefHeight="51.0" prefWidth="972.0" styleClass="background-color" stylesheets="@style.css">
+                  <children>
+                     <Pane prefHeight="51.0" prefWidth="11.0" />
+                     <ToggleButton fx:id="Monday" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" styleClass="button" stylesheets="@style.css" text="Monday" textFill="WHITE" />
+                     <Pane prefHeight="51.0" prefWidth="11.0" />
+                     <ToggleButton fx:id="Tuesday" lineSpacing="10.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="128.0" styleClass="button" stylesheets="@style.css" text="Tuesday" textFill="WHITE" />
+                     <Pane prefHeight="51.0" prefWidth="11.0" />
+                     <ToggleButton fx:id="Wednesday" mnemonicParsing="false" prefHeight="35.0" prefWidth="128.0" styleClass="button" stylesheets="@style.css" text="Wednesday" textFill="WHITE" />
+                     <Pane prefHeight="51.0" prefWidth="11.0" />
+                     <ToggleButton fx:id="Thursday" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" styleClass="button" stylesheets="@style.css" text="thursday" textFill="WHITE" />
+                     <Pane prefHeight="51.0" prefWidth="11.0" />
+                     <ToggleButton fx:id="Friday" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" styleClass="button" stylesheets="@style.css" text="Friday" textFill="WHITE" />
+                     <Pane prefHeight="51.0" prefWidth="11.0" />
+                     <ToggleButton fx:id="Saturday" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" styleClass="button" stylesheets="@style.css" text="Saturday" textFill="WHITE" />
+                     <Pane prefHeight="51.0" prefWidth="11.0" />
+                     <ToggleButton fx:id="Sunday" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" styleClass="button" stylesheets="@style.css" text="Sunday" textFill="WHITE" />
+                     <Pane prefHeight="51.0" prefWidth="11.0" />
+                  </children>
+               </HBox>
+               <VBox fx:id="tasksVBox" prefHeight="304.0" prefWidth="972.0" >
+                  <children>
+                     <ScrollPane prefHeight="306.0" prefWidth="972.0" >
+                        <content>
+                           <HBox fx:id="tasksHBox" prefHeight="302.0" prefWidth="970.0" />
+                        </content>
+                     </ScrollPane>
+                  </children>
+               </VBox>
+            </children>
+         </VBox>
+      </children>
+   </Pane>
+</children>
 </HBox>
