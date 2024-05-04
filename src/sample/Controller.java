@@ -24,6 +24,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -99,7 +100,7 @@ public class Controller extends PlanParser implements Initializable {
     @FXML HBox daysHBox;
     @FXML VBox fullWeekPlanVBox;
     @FXML VBox weekTitleVBox;
-    @FXML VBox tasksVBox;
+    @FXML Pane tasksVBox;
     HBox buttonBoxChatandemail;
 
     @FXML Label weekPlanLabel;
@@ -839,7 +840,6 @@ public class Controller extends PlanParser implements Initializable {
     }
     public void addTasksToHBox(){
         tasksHBox.getChildren().clear();
-        tasksHBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
         if(weekPlanSelected != null) {
             daySelected = weekPlanSelected.days.get((int) toggleDays.getSelectedToggle().getUserData() - 1);
             daySelectedID = daySelected.getDayID();
@@ -852,14 +852,13 @@ public class Controller extends PlanParser implements Initializable {
                 addTaskButton.setEffect(null);
             });
             VBox addTaskVBox = new VBox();
-            addTaskVBox.setPrefSize(275, 455);
-            addTaskVBox.setMaxSize(275, 455);
-            addTaskVBox.setMinSize(275, 455);
+            addTaskVBox.setPrefSize(275, 294);
+            addTaskVBox.setMaxSize(275, 294);
+            addTaskVBox.setMinSize(275, 294);
             addTaskVBox.setAlignment(Pos.CENTER);
             addTaskVBox.getChildren().add(addTaskButton);
             addTaskVBox.setStyle("-fx-background-color: #a5b0b0;-fx-border-color: black");
             tasksHBox.getChildren().add(addTaskVBox);
-            tasksHBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
             for (int t = 0; t < daySelected.tasks.size(); t++) {
                 Label taskName = new Label(daySelected.tasks.get(t).getTaskName());
                 taskName.setTextAlignment(TextAlignment.CENTER);
@@ -867,7 +866,7 @@ public class Controller extends PlanParser implements Initializable {
                 taskName.setFont(new Font("Copperplate Gothic Bold", 16));
                 taskName.setContentDisplay(ContentDisplay.CENTER);
                 taskName.setPrefWidth(Control.USE_COMPUTED_SIZE);
-                taskName.setPrefHeight(40);
+                taskName.setPrefHeight(35);
                 taskName.setPrefWidth(275);
                 taskName.setStyle("-fx-background-color: #909090;");
 
@@ -883,7 +882,7 @@ public class Controller extends PlanParser implements Initializable {
                 startLabel.setFont(new Font("Copperplate Gothic Bold", 14));
                 startLabel.setContentDisplay(ContentDisplay.CENTER);
                 startLabel.setPrefWidth(Control.USE_COMPUTED_SIZE);
-                startLabel.setPrefHeight(30);
+                startLabel.setPrefHeight(25);
                 startLabel.setPrefWidth(138);
 
                 Label endLabel = new Label("End Time " + daySelected.tasks.get(t).getEndTimeH() + ":" + daySelected.getTask(t).getEndTimeM());
@@ -892,11 +891,11 @@ public class Controller extends PlanParser implements Initializable {
                 endLabel.setFont(new Font("Copperplate Gothic Bold", 14));
                 endLabel.setContentDisplay(ContentDisplay.CENTER);
                 endLabel.setPrefWidth(Control.USE_COMPUTED_SIZE);
-                endLabel.setPrefHeight(30);
+                endLabel.setPrefHeight(25);
                 endLabel.setPrefWidth(121);
 
                 HBox startEndHBox = new HBox();
-                startEndHBox.setPrefSize(275, 30);
+                startEndHBox.setPrefSize(275, 25);
                 startEndHBox.setAlignment(Pos.CENTER);
                 startEndHBox.setSpacing(10);
                 startEndHBox.getChildren().addAll(startLabel, endLabel);
@@ -908,7 +907,7 @@ public class Controller extends PlanParser implements Initializable {
                 desLabel.setFont(new Font("Copperplate Gothic Bold", 15));
                 desLabel.setContentDisplay(ContentDisplay.CENTER);
                 desLabel.setPrefWidth(Control.USE_COMPUTED_SIZE);
-                desLabel.setPrefHeight(30);
+                desLabel.setPrefHeight(25);
                 desLabel.setPrefWidth(110);
 
                 HBox desHBox = new HBox();
@@ -920,14 +919,14 @@ public class Controller extends PlanParser implements Initializable {
                 descText.setText(daySelected.tasks.get(t).getTaskDescription());
                 descText.setFont(new Font("Copperplate Gothic Bold", 14));
                 descText.setEditable(false);
-                descText.setPrefSize(273, 126);
-                descText.setMinSize(273, 126);
-                descText.setMaxSize(273, 126);
+                descText.setPrefSize(273, 55);
+                descText.setMinSize(273, 55);
+                descText.setMaxSize(273, 55);
                 descText.setWrapText(true);
                 descText.setMouseTransparent(true);
 
                 VBox desVBox = new VBox();
-                desVBox.setPrefSize(273, 156);
+                desVBox.setPrefSize(273, 80);
                 desVBox.setAlignment(Pos.CENTER);
                 desVBox.getChildren().addAll(desHBox, descText);
 
@@ -938,11 +937,11 @@ public class Controller extends PlanParser implements Initializable {
                 progLabel.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 15));
                 progLabel.setContentDisplay(ContentDisplay.CENTER);
                 progLabel.setPrefWidth(Control.USE_COMPUTED_SIZE);
-                progLabel.setPrefHeight(30);
+                progLabel.setPrefHeight(25);
                 progLabel.setPrefWidth(110);
 
                 HBox progHBox = new HBox();
-                progHBox.setPrefSize(273, 30);
+                progHBox.setPrefSize(273, 15);
                 progHBox.setAlignment(Pos.CENTER_LEFT);
                 progHBox.getChildren().add(progLabel);
 
@@ -957,14 +956,14 @@ public class Controller extends PlanParser implements Initializable {
                 progText.setText(progs);
                 progText.setFont(new Font("Copperplate Gothic Bold", 14));
                 progText.setEditable(false);
-                progText.setPrefSize(273, 70);
-                progText.setMinSize(273, 70);
-                progText.setMaxSize(273, 70);
+                progText.setPrefSize(273, 50);
+                progText.setMinSize(273, 50);
+                progText.setMaxSize(273, 50);
                 progText.setWrapText(true);
                 progText.setMouseTransparent(true);
 
                 VBox progVBox = new VBox();
-                progVBox.setPrefSize(273, 100);
+                progVBox.setPrefSize(273, 80);
                 progVBox.setAlignment(Pos.CENTER);
                 progVBox.getChildren().addAll(progHBox, progText);
 
@@ -975,11 +974,11 @@ public class Controller extends PlanParser implements Initializable {
                 revLabel.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 15));
                 revLabel.setContentDisplay(ContentDisplay.CENTER);
                 revLabel.setPrefWidth(Control.USE_COMPUTED_SIZE);
-                revLabel.setPrefHeight(30);
+                revLabel.setPrefHeight(20);
                 revLabel.setPrefWidth(110);
 
                 HBox revHBox = new HBox();
-                revHBox.setPrefSize(273, 30);
+                revHBox.setPrefSize(273, 20);
                 revHBox.setAlignment(Pos.CENTER_LEFT);
                 revHBox.getChildren().add(revLabel);
 
@@ -987,14 +986,14 @@ public class Controller extends PlanParser implements Initializable {
                 revText.setText(daySelected.tasks.get(t).getTaskReview());
                 revText.setFont(new Font("Copperplate Gothic Bold", 14));
                 revText.setEditable(false);
-                revText.setPrefSize(273, 100);
-                revText.setMinSize(273, 100);
-                revText.setMaxSize(273, 100);
+                revText.setPrefSize(273, 40);
+                revText.setMinSize(273, 40);
+                revText.setMaxSize(273, 40);
                 revText.setWrapText(true);
                 revText.setMouseTransparent(true);
 
                 VBox revVBox = new VBox();
-                revVBox.setPrefSize(273, 130);
+                revVBox.setPrefSize(273, 80);
                 revVBox.setAlignment(Pos.CENTER);
                 revVBox.getChildren().addAll(revHBox, revText);
 
@@ -1012,11 +1011,11 @@ public class Controller extends PlanParser implements Initializable {
                 removeTask.setId(t + "");
                 removeTask.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 14));
                 removeTask.setPrefWidth(128);
-                removeTask.setPrefHeight(30);
+                removeTask.setPrefHeight(20);
                 removeTask.setStyle("-fx-background-color: white;");
                 HBox removeHBox = new HBox();
                 removeHBox.setAlignment(Pos.CENTER);
-                removeHBox.setPrefSize(275, 30);
+                removeHBox.setPrefSize(275, 20);
                 removeHBox.setPadding(new Insets(0,0,8,70));
                 removeHBox.setAlignment(Pos.CENTER_LEFT);
                 removeHBox.getChildren().add(removeTask);
@@ -1038,19 +1037,19 @@ public class Controller extends PlanParser implements Initializable {
 
                 //taskVBox
                 VBox taskVBox = new VBox();
-                taskVBox.setPrefSize(275, 455);
-                taskVBox.setMaxSize(275, 455);
-                taskVBox.setMinSize(275, 455);
+                taskVBox.setPrefSize(275, 320);
+                taskVBox.setMaxSize(275, 320);
+                taskVBox.setMinSize(275, 320);
                 taskVBox.setAlignment(Pos.CENTER);
                 taskVBox.setId("" + daySelected.tasks.get(t).getTaskID());
                 taskVBox.getChildren().addAll(taskNameHBox, startEndHBox, desVBox, progVBox, revVBox, statusLabel, removeHBox);
-                taskVBox.setStyle("-fx-background-color: #a5b0b0;-fx-border-color: black");
+                taskVBox.setStyle("-fx-background-color:  #a5b0b0;-fx-border-color: black");
                 if(daySelected.getDayID() != now.getDayOfWeek()) {
                     taskVBox.setOnMouseEntered(event -> {
                         taskVBox.setStyle("-fx-background-color: lightgrey;-fx-border-color: white;");
                     });
                     taskVBox.setOnMouseExited(event -> {
-                        taskVBox.setStyle("-fx-background-color: #a5b0b0;-fx-border-color: black;");
+                        taskVBox.setStyle("-fx-background-color:  #a5b0b0;-fx-border-color: black;");
                     });
                     taskVBox.setOnMouseClicked(event -> {
                         adaptor.setTaskSelectedName(taskName.getText());
@@ -1067,15 +1066,36 @@ public class Controller extends PlanParser implements Initializable {
 
     }
     private void openChatWindow() {
-        // Define chatbox UI components
         startChatRefresh();
+
+        
+
         TextField chatInput = new TextField();
+        chatInput.setPrefHeight(50.0);
+        chatInput.setPrefWidth(399.0);
         chatInput.setPromptText("Type a message...");
-        chatInput.setPrefWidth(200);
+
+        Button sendButton = new Button();
+        sendButton.setPrefHeight(35.0);
+        sendButton.setPrefWidth(65.0);
+        sendButton.setText("Send");
+        sendButton.setStyle("-fx-background-color: #103F66;"+
+                    "-fx-border-width: 2px; " +
+                    "-fx-border-radius: 20px; " +
+                    "-fx-background-radius: 20px; " +
+                    "-fx-border-style: solid; " +
+                    "-fx-border-color: #000000; " +
+                    "-fx-text-fill: white;"+
+                    "-fx-min-height: 35; " +  
+                    "-fx-pref-height: 35;");
+        sendButton.setTextFill(javafx.scene.paint.Color.WHITE);
+        sendButton.getStyleClass().add("inner_pane");
+        
+
+     
         String coachName = adaptor.getPatientSelected().getCoachName();
         String patientName = adaptor.getPatientSelected().getPatientName();
 
-        Button sendButton = new Button("Send");
         sendButton.setOnAction(e -> {
             String message = chatInput.getText();
             System.out.println("Message sent: " + message);      
@@ -1093,27 +1113,33 @@ public class Controller extends PlanParser implements Initializable {
         });
     
         messageDisplay = new TextArea();
-        messageDisplay.setEditable(false);
-        messageDisplay.setStyle("-fx-background-color: inherit;"); // Apply inline style to chat window
-        messageDisplay.setPrefWidth(250);
-        messageDisplay.setPrefHeight(150);
+        messageDisplay.setEditable(false);        
+        messageDisplay.setPrefHeight(333.0);
+        messageDisplay.setPrefWidth(474.0);
+        messageDisplay.setStyle("-fx-background-color: inherit;");
     
         HBox inputLayout = new HBox(chatInput, sendButton);
         inputLayout.setAlignment(Pos.CENTER);
         inputLayout.setSpacing(10);
+
     
         VBox chatboxLayout = new VBox(messageDisplay, inputLayout);
         chatboxLayout.setAlignment(Pos.CENTER);
         chatboxLayout.setSpacing(10);
+        chatboxLayout.setAlignment(javafx.geometry.Pos.CENTER);
+        chatboxLayout.setPrefHeight(439.0);
+        chatboxLayout.setPrefWidth(505.0);
+        chatboxLayout.setStyle("-fx-background-color: #bebeb6; -fx-border-color: #103F66; -fx-border-width: 3px;"); // Set background color and border
+
     
         // Create a new stage (window) for the chatbox
         Stage chatboxStage = new Stage();
         chatboxStage.setTitle(adaptor.getPatientSelected().getPatientName());
-        chatboxStage.setScene(new Scene(chatboxLayout, 300, 200));
+        chatboxStage.setScene(new Scene(chatboxLayout, 505, 439));
     
         // Set the modality of the chatbox stage to APPLICATION_MODAL
         chatboxStage.initModality(Modality.APPLICATION_MODAL);
-    
+        
         // Show the chatbox stage
         chatboxStage.show();
         chatboxStage.setOnCloseRequest(event->stopRefresh());

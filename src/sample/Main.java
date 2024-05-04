@@ -188,7 +188,7 @@ public class Main extends Application {
         HBox errorLabelHBox = new HBox();
         errorLabelHBox.getChildren().add(errorLabel);
         errorLabelHBox.setAlignment(Pos.CENTER);
-        errorLabelHBox.setStyle("-fx-background-color: #2e6a6f;");
+        errorLabelHBox.setStyle("-fx-background-color: #103F66;");
 
         //error Messaage
         Label errorText = new Label("Error");
@@ -209,7 +209,7 @@ public class Main extends Application {
         errorOkButton.setTextFill(Color.WHITE);
         errorOkButton.setPrefWidth(150);
         errorOkButton.setPrefHeight(25);
-        errorOkButton.setStyle("-fx-background-color: #2b686d55;");
+        errorOkButton.setStyle("-fx-background-color: #103F66;");
 
         errorOkButton.setOnMouseEntered(event4 -> {
             errorOkButton.setEffect(borderGlow);
@@ -220,7 +220,7 @@ public class Main extends Application {
    
 
         HBox buttonsError = new HBox();
-        buttonsError.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsError.setStyle("-fx-background-color: #103F66;");
         buttonsError.setAlignment(Pos.CENTER);
         buttonsError.setSpacing(70);
         buttonsError.getChildren().addAll(errorOkButton);
@@ -228,6 +228,7 @@ public class Main extends Application {
         errorMessageVBox.getChildren().addAll(errorLabelHBox, errorTextHBox, buttonsError);
         errorMessageVBox.setAlignment(Pos.CENTER);
         errorMessageVBox.setSpacing(30);
+        errorMessageVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 1px; -fx-border-radius: 10px;");
         Scene errorScene = new Scene(errorMessageVBox, 500, 208);
 
         errorMessage.initModality(Modality.APPLICATION_MODAL);
@@ -252,7 +253,7 @@ public class Main extends Application {
         HBox loginLabelHBox = new HBox();
         loginLabelHBox.getChildren().add(loginLabel);
         loginLabelHBox.setAlignment(Pos.CENTER);
-        loginLabelHBox.setStyle("-fx-background-color: #2e6a6f;");
+        loginLabelHBox.setStyle("-fx-background-color: #103F66;");
 
         //user Name HBox
         Label userNameLabel = new Label("User Name:");
@@ -316,7 +317,7 @@ public class Main extends Application {
         loginBtn.setTextFill(Color.WHITE);
         loginBtn.setPrefWidth(150);
         loginBtn.setPrefHeight(25);
-        loginBtn.setStyle("-fx-background-color: #2b686d55;");
+        loginBtn.setStyle("-fx-background-color: #103F66;");
         loginBtn.setDisable(true);
 
         Button signupPBtn = new Button("Signup");
@@ -324,17 +325,17 @@ public class Main extends Application {
         signupPBtn.setTextFill(Color.WHITE);
         signupPBtn.setPrefWidth(150);
         signupPBtn.setPrefHeight(25);
-        signupPBtn.setStyle("-fx-background-color: #2e6a6f55;");
+        signupPBtn.setStyle("-fx-background-color: #103F66;");
 
         Button cancelLogin = new Button("Exit");
         cancelLogin.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         cancelLogin.setTextFill(Color.WHITE);
         cancelLogin.setPrefWidth(150);
         cancelLogin.setPrefHeight(25);
-        cancelLogin.setStyle("-fx-background-color: #2e6a6f55;");
+        cancelLogin.setStyle("-fx-background-color: #103F66;");
 
         HBox buttonsLogin = new HBox();
-        buttonsLogin.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsLogin.setStyle("-fx-background-color: #103F66;");
         buttonsLogin.setAlignment(Pos.CENTER);
         buttonsLogin.setSpacing(40);
         buttonsLogin.getChildren().addAll(loginBtn, signupPBtn, cancelLogin);
@@ -342,6 +343,7 @@ public class Main extends Application {
         loginVBox.getChildren().addAll(loginLabelHBox, userNameHBox, passwordHBox,  buttonsLogin);
         loginVBox.setAlignment(Pos.CENTER);
         loginVBox.setSpacing(20);
+        loginVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 3px; -fx-border-radius: 10px;");
         Scene loginScene = new Scene(loginVBox, 570, 235);
 
         loginStage.initModality(Modality.APPLICATION_MODAL);
@@ -374,7 +376,7 @@ public class Main extends Application {
         HBox signupLabelHBox = new HBox();
         signupLabelHBox.getChildren().add(signupLabel);
         signupLabelHBox.setAlignment(Pos.CENTER);
-        signupLabelHBox.setStyle("-fx-background-color: #2e6a6f;");
+        signupLabelHBox.setStyle("-fx-background-color: #103F66;");
 
         //user Name HBox
         Label userNameSLabel = new Label("User Name:");
@@ -433,17 +435,17 @@ public class Main extends Application {
         signupSBtn.setTextFill(Color.WHITE);
         signupSBtn.setPrefWidth(150);
         signupSBtn.setPrefHeight(25);
-        signupSBtn.setStyle("-fx-background-color: #2b686d55;");
+        signupSBtn.setStyle("-fx-background-color: #103F66;");
 
         Button cancelSignup = new Button("Cancel");
         cancelSignup.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         cancelSignup.setTextFill(Color.WHITE);
         cancelSignup.setPrefWidth(150);
         cancelSignup.setPrefHeight(25);
-        cancelSignup.setStyle("-fx-background-color: #2b686d55;");
+        cancelSignup.setStyle("-fx-background-color: #103F66;");
 
         HBox buttonsSignup = new HBox();
-        buttonsSignup.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsSignup.setStyle("-fx-background-color: #103F66;");
         buttonsSignup.setAlignment(Pos.CENTER);
         buttonsSignup.setSpacing(70);
         buttonsSignup.getChildren().addAll(signupSBtn, cancelSignup);
@@ -451,6 +453,7 @@ public class Main extends Application {
         signupVBox.getChildren().addAll(signupLabelHBox, userNameSHBox, passwordSHBox, repeatPassHBox,emailSHBox, buttonsSignup);
         signupVBox.setAlignment(Pos.CENTER);
         signupVBox.setSpacing(20);
+        signupVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 5px; -fx-border-radius: 10px;");
         Scene signupScene = new Scene(signupVBox, 560, 295);
 
         BooleanBinding bb3 = new BooleanBinding() {
@@ -520,7 +523,6 @@ public class Main extends Application {
                     + emailSField.getText());
                 }
                 else{
-                    System.out.println("passwrods do not Match!!!");
                     errorText.setText("Passwords do not match");
                     signupVBox.setDisable(true);
                     signupStage.hide();
@@ -580,7 +582,7 @@ public class Main extends Application {
         HBox removeTLabelHBox = new HBox();
         removeTLabelHBox.getChildren().add(removeTLabel);
         removeTLabelHBox.setAlignment(Pos.CENTER);
-        removeTLabelHBox.setStyle("-fx-background-color: #2e6a6f;");
+        removeTLabelHBox.setStyle("-fx-background-color: #103F66;");
 
         Label removeTName = new Label(adaptor.getRemoveTName());
         removeTName.setTextAlignment(TextAlignment.CENTER);
@@ -600,7 +602,7 @@ public class Main extends Application {
         removeTOkButton.setTextFill(Color.WHITE);
         removeTOkButton.setPrefWidth(150);
         removeTOkButton.setPrefHeight(25);
-        removeTOkButton.setStyle("-fx-background-color: #2b686d55;");
+        removeTOkButton.setStyle("-fx-background-color: #103F66;");
 
         removeTOkButton.setOnMouseEntered(event4 -> {
             removeTOkButton.setEffect(borderGlow);
@@ -614,7 +616,7 @@ public class Main extends Application {
         cancelTRemove.setTextFill(Color.WHITE);
         cancelTRemove.setPrefWidth(150);
         cancelTRemove.setPrefHeight(25);
-        cancelTRemove.setStyle("-fx-background-color: #2b686d55;");
+        cancelTRemove.setStyle("-fx-background-color: #103F66;");
         cancelTRemove.setOnMouseEntered(event8 -> {
             cancelTRemove.setEffect(borderGlow);
         });
@@ -625,7 +627,7 @@ public class Main extends Application {
       
 
         HBox buttonsTRemove = new HBox();
-        buttonsTRemove.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsTRemove.setStyle("-fx-background-color: #103F66;");
         buttonsTRemove.setAlignment(Pos.CENTER);
         buttonsTRemove.setSpacing(55);
         buttonsTRemove.getChildren().addAll(removeTOkButton, cancelTRemove);
@@ -648,6 +650,8 @@ public class Main extends Application {
         removeTVBox.getChildren().addAll(removeTLabelHBox, removeTNameHBox, buttonsTRemove);
         removeTVBox.setAlignment(Pos.CENTER);
         removeTVBox.setSpacing(30);
+        removeTVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 3px; -fx-border-radius: 10px;");
+
         Scene removeTScene = new Scene(removeTVBox, 400, 195);
 
         adaptor.getRemoveTaskButton().defaultButtonProperty().addListener(new ChangeListener<Boolean>() {
@@ -689,7 +693,7 @@ public class Main extends Application {
         HBox saveLabelHBox = new HBox();
         saveLabelHBox.getChildren().add(saveLabel);
         saveLabelHBox.setAlignment(Pos.CENTER);
-        saveLabelHBox.setStyle("-fx-background-color: #2e6a6f;");
+        saveLabelHBox.setStyle("-fx-background-color: #103F66;");
 
         //Save Messaage
         Label saveText = new Label("Do you want to save the changes?");
@@ -710,7 +714,7 @@ public class Main extends Application {
         saveOkButton.setTextFill(Color.WHITE);
         saveOkButton.setPrefWidth(150);
         saveOkButton.setPrefHeight(25);
-        saveOkButton.setStyle("-fx-background-color: #2b686d55;");
+        saveOkButton.setStyle("-fx-background-color: #103F66;");
 
         saveOkButton.setOnMouseEntered(event4 -> {
             saveOkButton.setEffect(borderGlow);
@@ -724,7 +728,7 @@ public class Main extends Application {
         cancelSave.setTextFill(Color.WHITE);
         cancelSave.setPrefWidth(150);
         cancelSave.setPrefHeight(25);
-        cancelSave.setStyle("-fx-background-color: #2b686d55;");
+        cancelSave.setStyle("-fx-background-color: #103F66;");
         cancelSave.setOnMouseEntered(event8 -> {
             cancelSave.setEffect(borderGlow);
         });
@@ -733,7 +737,7 @@ public class Main extends Application {
         });
 
         HBox buttonsSave = new HBox();
-        buttonsSave.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsSave.setStyle("-fx-background-color: #103F66;");
         buttonsSave.setAlignment(Pos.CENTER);
         buttonsSave.setSpacing(40);
         buttonsSave.getChildren().addAll(saveOkButton, cancelSave);
@@ -817,6 +821,7 @@ public class Main extends Application {
         saveMessageVBox.getChildren().addAll(saveLabelHBox, saveTextHBox, buttonsSave);
         saveMessageVBox.setAlignment(Pos.CENTER);
         saveMessageVBox.setSpacing(30);
+        saveMessageVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 3px; -fx-border-radius: 10px;");
         Scene saveScene = new Scene(saveMessageVBox, 420, 178);
 
         adaptor.getSaveAndExitButton().setOnMouseClicked(event -> {
@@ -851,7 +856,7 @@ public class Main extends Application {
         HBox addTLHBox = new HBox();
         addTLHBox.getChildren().add(addTLabel);
         addTLHBox.setAlignment(Pos.CENTER);
-        addTLHBox.setStyle("-fx-background-color: #2e6a6f;");
+        addTLHBox.setStyle("-fx-background-color: #103F66;");
 
         //task Name
         Label tNameLabel = new Label("Task Title:*");
@@ -989,7 +994,7 @@ public class Main extends Application {
         listAdd.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 14));
         listAdd.setPrefWidth(80);
         listAdd.setPrefHeight(40);
-        listAdd.setStyle("-fx-background-color: #2b686d55;");
+        listAdd.setStyle("-fx-background-color: #103F66;");
 
 //        TableView progsTabel = new TableView();
 //        TableColumn progsCol = new TableColumn("Programs");
@@ -1016,7 +1021,7 @@ public class Main extends Application {
         listRemove.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 14));
         listRemove.setPrefWidth(80);
         listRemove.setPrefHeight(40);
-        listRemove.setStyle("-fx-background-color: #2b686d55;");
+        listRemove.setStyle("-fx-background-color: #103F66;");
 
         listAdd.setOnMouseEntered(event8 -> {
             listAdd.setStyle("-fx-background-color: #5A54C455;");
@@ -1064,6 +1069,7 @@ public class Main extends Application {
         HBox listHBox = new HBox();
         listHBox.setSpacing(5);
         listHBox.getChildren().addAll(listLabel, progsList, listRemove);
+
         listHBox.setAlignment(Pos.TOP_CENTER);
         //Buttons
         Button addTBtn = new Button("Add");
@@ -1071,22 +1077,23 @@ public class Main extends Application {
         addTBtn.setTextFill(Color.WHITE);
         addTBtn.setPrefWidth(150);
         addTBtn.setPrefHeight(25);
-        addTBtn.setStyle("-fx-background-color: #2b686d55;");
+        addTBtn.setStyle("-fx-background-color: #103F66;");
 
         Button cancelTadd = new Button("Cancel");
         cancelTadd.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         cancelTadd.setTextFill(Color.WHITE);
         cancelTadd.setPrefWidth(150);
         cancelTadd.setPrefHeight(25);
-        cancelTadd.setStyle("-fx-background-color: #2b686d55;");
+        cancelTadd.setStyle("-fx-background-color: #103F66;");
 
         HBox buttonsTadd = new HBox();
-        buttonsTadd.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsTadd.setStyle("-fx-background-color: #103F66;");
         buttonsTadd.setAlignment(Pos.CENTER);
         buttonsTadd.setSpacing(70);
         buttonsTadd.getChildren().addAll(addTBtn, cancelTadd);
 
         addTVBox.getChildren().addAll(addTLHBox, tNameHBox, dHBox, tStartHBox, tEndHBox, progsHBox, listHBox, buttonsTadd);
+        addTVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 3px; -fx-border-radius: 10px;");
         addTVBox.setAlignment(Pos.CENTER);
         addTVBox.setSpacing(10);
         Scene addTScene = new Scene(addTVBox, 525, 550);
@@ -1493,7 +1500,7 @@ public class Main extends Application {
             HBox overPerfHBox = new HBox();
             overPerfHBox.getChildren().add(overPerfLabel);
             overPerfHBox.setAlignment(Pos.CENTER);
-            overPerfHBox.setStyle("-fx-background-color: #2e6a6f;");
+            overPerfHBox.setStyle("-fx-background-color: #103F66;");
             //Chart
             final NumberAxis yAxis = new NumberAxis();
             final CategoryAxis xAxis = new CategoryAxis();
@@ -1522,10 +1529,10 @@ public class Main extends Application {
             overPerfCloseBtn.setTextFill(Color.WHITE);
             overPerfCloseBtn.setPrefWidth(150);
             overPerfCloseBtn.setPrefHeight(25);
-            overPerfCloseBtn.setStyle("-fx-background-color: #2b686d55;");
+            overPerfCloseBtn.setStyle("-fx-background-color: #103F66;");
 
             HBox buttonsOPClose = new HBox();
-            buttonsOPClose.setStyle("-fx-background-color: #2e6a6f;");
+            buttonsOPClose.setStyle("-fx-background-color: #103F66;");
             buttonsOPClose.setAlignment(Pos.CENTER);
             buttonsOPClose.setSpacing(70);
             buttonsOPClose.getChildren().addAll(overPerfCloseBtn);
@@ -1545,6 +1552,7 @@ public class Main extends Application {
             overPerfVBox.getChildren().addAll(overPerfHBox, lineChart, buttonsOPClose);
             overPerfVBox.setAlignment(Pos.CENTER);
             overPerfVBox.setSpacing(20);
+            overPerfVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 3px; -fx-border-radius: 10px;");
             Scene overPerfScene = new Scene(overPerfVBox, 800, 500);
 
             overPerfStage = new Stage();
@@ -1574,7 +1582,7 @@ public class Main extends Application {
         HBox addPLabelHBox = new HBox();
         addPLabelHBox.getChildren().add(addPLabel);
         addPLabelHBox.setAlignment(Pos.CENTER);
-        addPLabelHBox.setStyle("-fx-background-color: #2e6a6f;");
+        addPLabelHBox.setStyle("-fx-background-color: #103F66;");
 
 
         //P name HBox
@@ -1603,17 +1611,17 @@ public class Main extends Application {
         addPBtn.setTextFill(Color.WHITE);
         addPBtn.setPrefWidth(150);
         addPBtn.setPrefHeight(25);
-        addPBtn.setStyle("-fx-background-color: #2b686d55;");
+        addPBtn.setStyle("-fx-background-color: #103F66;");
 
         Button cancelPadd = new Button("Cancel");
         cancelPadd.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         cancelPadd.setTextFill(Color.WHITE);
         cancelPadd.setPrefWidth(150);
         cancelPadd.setPrefHeight(25);
-        cancelPadd.setStyle("-fx-background-color: #2b686d55;");
+        cancelPadd.setStyle("-fx-background-color: #103F66;");
 
         HBox buttonsPadd = new HBox();
-        buttonsPadd.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsPadd.setStyle("-fx-background-color: #103F66;");
         buttonsPadd.setAlignment(Pos.CENTER);
         buttonsPadd.setSpacing(70);
         buttonsPadd.getChildren().addAll(addPBtn, cancelPadd);
@@ -1636,6 +1644,7 @@ public class Main extends Application {
         addPVBox.getChildren().addAll(addPLabelHBox, pNameHBox,addPTipHBox, buttonsPadd);
         addPVBox.setAlignment(Pos.CENTER);
         addPVBox.setSpacing(20);
+        addPVBox.setStyle("-fx-border-color:  #103F66; -fx-border-width: 5px; -fx-border-radius: 10px;");
         Scene addPScene = new Scene(addPVBox, 470, 295);
 
         //addPBtn.setDisable(true);
@@ -1741,7 +1750,7 @@ public class Main extends Application {
         HBox removeWLabelHBox = new HBox();
         removeWLabelHBox.getChildren().add(removeWLabel);
         removeWLabelHBox.setAlignment(Pos.CENTER);
-        removeWLabelHBox.setStyle("-fx-background-color: #2e6a6f;");
+        removeWLabelHBox.setStyle("-fx-background-color: #103F66;");
 
         //P name HBox
         Label wRNameLabel = new Label("");
@@ -1761,21 +1770,22 @@ public class Main extends Application {
         removeWBtn.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         removeWBtn.setPrefWidth(150);
         removeWBtn.setPrefHeight(25);
-        removeWBtn.setStyle("-fx-background-color: #2b686d55;");
+        removeWBtn.setStyle("-fx-background-color: #103F66;");
 
         Button cancelWremove = new Button("Cancel");
         cancelWremove.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         cancelWremove.setPrefWidth(150);
         cancelWremove.setPrefHeight(25);
-        cancelWremove.setStyle("-fx-background-color: #2b686d55;");
+        cancelWremove.setStyle("-fx-background-color: #103F66;");
 
         HBox buttonsWremove = new HBox();
-        buttonsWremove.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsWremove.setStyle("-fx-background-color: #103F66;");
         buttonsWremove.setAlignment(Pos.CENTER);
         buttonsWremove.setSpacing(70);
         buttonsWremove.getChildren().addAll(removeWBtn, cancelWremove);
 
         removeWVBox.getChildren().addAll(removeWLabelHBox, wRNameHBox, buttonsWremove);
+        removeWVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 3px; -fx-border-radius: 10px;");
         removeWVBox.setAlignment(Pos.CENTER);
         removeWVBox.setSpacing(30);
         Scene removeWScene = new Scene(removeWVBox, 420, 178);
@@ -1839,7 +1849,7 @@ public class Main extends Application {
         HBox removePLabelHBox = new HBox();
         removePLabelHBox.getChildren().add(removePLabel);
         removePLabelHBox.setAlignment(Pos.CENTER);
-        removePLabelHBox.setStyle("-fx-background-color: #2e6a6f;");
+        removePLabelHBox.setStyle("-fx-background-color: #103F66;");
 
         //P name HBox
         Label pRNameLabel = new Label("");
@@ -1860,23 +1870,24 @@ public class Main extends Application {
         removePBtn.setTextFill(Color.WHITE);
         removePBtn.setPrefWidth(150);
         removePBtn.setPrefHeight(25);
-        removePBtn.setStyle("-fx-background-color: #2b686d55;");
+        removePBtn.setStyle("-fx-background-color: #103F66;");
 
         Button cancelPremove = new Button("Cancel");
         cancelPremove.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         cancelPremove.setTextFill(Color.WHITE);
         cancelPremove.setPrefWidth(150);
         cancelPremove.setPrefHeight(25);
-        cancelPremove.setStyle("-fx-background-color: #2b686d55;");
+        cancelPremove.setStyle("-fx-background-color: #103F66;");
 
         HBox buttonsPremove = new HBox();
-        buttonsPremove.setStyle("-fx-background-color: #2e6a6f;");
+        buttonsPremove.setStyle("-fx-background-color: #103F66;");
         buttonsPremove.setAlignment(Pos.CENTER);
         buttonsPremove.setSpacing(70);
         buttonsPremove.getChildren().addAll(removePBtn, cancelPremove);
         removePVBox.getChildren().addAll(removePLabelHBox, pRNameHBox, buttonsPremove);
         removePVBox.setAlignment(Pos.CENTER);
         removePVBox.setSpacing(30);
+        removePVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 3px; -fx-border-radius: 10px;");
         Scene removePScene = new Scene(removePVBox, 420, 178);
 
         removePBtn.setOnMouseClicked(event -> {
@@ -1937,7 +1948,7 @@ public class Main extends Application {
         HBox newWPLHBox = new HBox();
         newWPLHBox.getChildren().add(newWeekPlanLabel);
         newWPLHBox.setAlignment(Pos.CENTER);
-        newWPLHBox.setStyle("-fx-background-color: #2e6a6f;");
+        newWPLHBox.setStyle("-fx-background-color: #103F66;");
 
         //WeekPlan name
         Label wPlanNameLabel = new Label("WeekPlan Name:");
@@ -1961,6 +1972,7 @@ public class Main extends Application {
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
         LocalDate local = LocalDate.now();
+
         //selecting Start Date
         Label wPlanStartLabel = new Label("Start Date:");
         wPlanStartLabel.setTextAlignment(TextAlignment.CENTER);
@@ -2045,22 +2057,23 @@ public class Main extends Application {
         newWPBtn.setTextFill(Color.WHITE);
         newWPBtn.setPrefWidth(150);
         newWPBtn.setPrefHeight(25);
-        newWPBtn.setStyle("-fx-background-color: #2b686d55;");
+        newWPBtn.setStyle("-fx-background-color: #103F66;");
 
         Button cancelNewWPBtn = new Button("Cancel");
         cancelNewWPBtn.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 20));
         cancelNewWPBtn.setTextFill(Color.WHITE);
         cancelNewWPBtn.setPrefWidth(150);
         cancelNewWPBtn.setPrefHeight(25);
-        cancelNewWPBtn.setStyle("-fx-background-color: #2b686d55;");
+        cancelNewWPBtn.setStyle("-fx-background-color: #103F66;");
 
         HBox btnsNewWP = new HBox();
-        btnsNewWP.setStyle("-fx-background-color: #2e6a6f;");
+        btnsNewWP.setStyle("-fx-background-color: #103F66;");
         btnsNewWP.setAlignment(Pos.CENTER);
         btnsNewWP.setSpacing(70);
         btnsNewWP.getChildren().addAll(newWPBtn, cancelNewWPBtn);
 
         newWeekPlanVBox.getChildren().addAll(newWPLHBox, wPNHBox, wPSHBox, btnsNewWP);
+        newWeekPlanVBox.setStyle("-fx-border-color: #103F66; -fx-border-width: 3px; -fx-border-radius: 10px;");
         newWeekPlanVBox.setAlignment(Pos.CENTER);
         newWeekPlanVBox.setSpacing(30);
         Scene newWeekScene = new Scene(newWeekPlanVBox, 420, 250);

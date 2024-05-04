@@ -30,6 +30,12 @@
     -fx-border-style: solid;
     -fx-border-color: #000000; /* Set border color to black */
 }
+
+.Patient{
+    -fx-text-fill: #103F66; /* Set text color to the equivalent hexadecimal value */
+    -fx-border-color: #103F66; /* Set border color */
+    -fx-border-width: 0 0 5px 0; /* Set border width (top right bottom left) */
+}
 .border{
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
