@@ -156,8 +156,8 @@ public class Main extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(new Scene(root));
         stage.centerOnScreen();
-        stage.setWidth(1259.0);
-        stage.setHeight(649.0);
+        stage.setWidth(1298.0);
+        stage.setHeight(713.0);
 
         //webView to connect to server
         WebView web = new WebView();
@@ -1815,24 +1815,6 @@ public class Main extends Application {
             cancelWremove.setEffect(null);
         });
 
-        adaptor.getRemoveWeekPlanButton().setOnMouseClicked(event -> {
-            removeWStage = new Stage();
-            removeWStage.initModality(Modality.APPLICATION_MODAL);
-            removeWStage.initOwner(stage);
-            removeWStage.centerOnScreen();
-            wRNameLabel.setText(adaptor.getWeekPlanSelected().getWeekPlanName());
-            removeWStage.initStyle(StageStyle.TRANSPARENT);
-            removeWStage.setAlwaysOnTop(true);
-            removeWStage.setScene(removeWScene);
-            removeWStage.setResizable(false);
-            adaptor.getToggleDays().selectToggle(null);
-            adaptor.getMainHBox().setDisable(true);
-            removeWStage.show();
-            File file = new File("Notification.mp3");
-            Media media = new Media(file.toURI().toString());
-            MediaPlayer mediaplayer = new MediaPlayer(media);
-            mediaplayer.play();
-        });
 
         //Removing Patient
         VBox removePVBox = new VBox();

@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
@@ -562,38 +563,49 @@ public class Adaptor {
             patientName.setAlignment(Pos.CENTER);
             patientName.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 12));
             patientName.setStyle("-fx-background-color: #103F66; " +
-                     "-fx-border-width: 2px; " +
-                     "-fx-border-radius: 20px; " +
-                     "-fx-background-radius: 20px; " +
-                     "-fx-border-style: solid; " +
-                     "-fx-border-color: #000000; " +
-                     "-fx-text-fill: white;");           
+            "-fx-border-width: 2px; " +
+            "-fx-border-color: transparent; " + 
+            "-fx-text-fill: white; " +
+            "-fx-background-radius: 50%; " + 
+            "-fx-min-height: 100px; " + 
+            "-fx-min-width: 100px; " + 
+            "-fx-pref-height: 100px; " +
+            "-fx-pref-width: 100px; " +
+            "-fx-max-height: 100px; " +
+            "-fx-max-width: 100px;");
             patientName.setContentDisplay(ContentDisplay.CENTER);
             patientName.setPrefWidth(Control.USE_COMPUTED_SIZE);
-            patientName.setPrefSize(155, 45);
-            patientName.setMinSize(155, 45);
-            patientName.setMaxSize(155, 45);
+            patientName.setPrefSize(155, 100);
+            patientName.setMinSize(155, 100);
+            patientName.setMaxSize(155, 100);
             patientName.setToggleGroup(togglePatients);
             patientName.selectedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if(newValue){
-                        patientName.setStyle("-fx-background-color: #008000; " +
-                     "-fx-border-width: 2px; " +
-                     "-fx-border-radius: 20px; " +
-                     "-fx-background-radius: 20px; " +
-                     "-fx-border-style: solid; " +
-                     "-fx-border-color: #000000; " +
-                     "-fx-text-fill: white;"); 
-                    }
-                    else {
+                    if (newValue) {
+                        patientName.setStyle("-fx-background-color: #006400; "  + 
+                                             "-fx-border-width: 2px; " +
+                                             "-fx-border-color: transparent; " + 
+                                             "-fx-text-fill: white; " +
+                                             "-fx-background-radius: 50%; " + 
+                                             "-fx-min-height: 100px; " + 
+                                             "-fx-min-width: 100px; " + 
+                                             "-fx-pref-height: 100px; " +
+                                             "-fx-pref-width: 100px; " +
+                                             "-fx-max-height: 100px; " +
+                                             "-fx-max-width: 100px;");
+                    } else {
                         patientName.setStyle("-fx-background-color: #103F66; " +
-                     "-fx-border-width: 2px; " +
-                     "-fx-border-radius: 20px; " +
-                     "-fx-background-radius: 20px; " +
-                     "-fx-border-style: solid; " +
-                     "-fx-border-color: #000000; " +
-                     "-fx-text-fill: white;"); 
+                        "-fx-border-width: 2px; " +
+                        "-fx-border-color: transparent; " + 
+                        "-fx-text-fill: white; " +
+                        "-fx-background-radius: 50%; " + 
+                        "-fx-min-height: 100px; " + 
+                        "-fx-min-width: 100px; " + 
+                        "-fx-pref-height: 100px; " +
+                        "-fx-pref-width: 100px; " +
+                        "-fx-max-height: 100px; " +
+                        "-fx-max-width: 100px;");
                     }
                 }
             });
@@ -608,6 +620,7 @@ public class Adaptor {
             patientsVBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
             patientsVBox.setSpacing(10);
             patientsVBox.getChildren().add(patientName);
+          
         }
         ObservableList<Node> patients = patientsVBox.getChildren();
         for (Node x: patients) {

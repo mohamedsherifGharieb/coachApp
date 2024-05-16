@@ -20,8 +20,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -154,7 +159,6 @@ public class Controller extends PlanParser implements Initializable {
         adaptor.setPatientsVBox(patientsVBox);
         adaptor.setRemovePatientButton(removePatientButton);
         adaptor.setRemoveTaskButton(removeTaskButton);
-        adaptor.setRemoveWeekPlanButton(removeWeekPlanButton);
         tasksHBox.setBackground(new Background(new BackgroundFill(Color.web("#bebeb6"), CornerRadii.EMPTY, Insets.EMPTY)));
         adaptor.setTasksHBox(tasksHBox);
         adaptor.setWeekPlanHBox(weekPlanHBox);
@@ -169,7 +173,6 @@ public class Controller extends PlanParser implements Initializable {
 
         weekPlanVBox.setDisable(true);
         newWeekPlanButton.setDisable(true);
-        removeWeekPlanButton.setDisable(true);
         tasksVBox.setDisable(true);
         daysHBox.setDisable(true);
         weekTitleVBox.setDisable(true);
@@ -191,6 +194,7 @@ public class Controller extends PlanParser implements Initializable {
                             
           chatButton.setOnMouseClicked(event -> {
             openChatWindow();
+           
         });
           
           // Create HBox container
@@ -475,11 +479,14 @@ public class Controller extends PlanParser implements Initializable {
 
         addPatientButton.setOnMouseEntered(event1 -> {
             addPatientButton.setEffect(borderGlow);
+
+    
         });
         addPatientButton.setOnMouseExited(event1 -> {
             addPatientButton.setEffect(null);
+           
         });
-
+      
         addTaskButton.setOnMouseEntered(event1 -> {
             addTaskButton.setEffect(borderGlow);
         });
@@ -495,6 +502,9 @@ public class Controller extends PlanParser implements Initializable {
         });
 
         removePatientButton.setDisable(true);
+
+        
+    
         chatButton.setDisable(true);
         removePatientButton.setOnMouseEntered(event1 -> {
             removePatientButton.setEffect(borderGlow);
@@ -503,13 +513,6 @@ public class Controller extends PlanParser implements Initializable {
             removePatientButton.setEffect(null);
         });
 
-        removeWeekPlanButton.setOnMouseEntered(event1 -> {
-            removeWeekPlanButton.setEffect(borderGlow);
-        });
-        removeWeekPlanButton.setOnMouseExited(event1 -> {
-            removeWeekPlanButton.setEffect(null);
-        });
-        
 
         removeTaskButton.setOnMouseEntered(event1 -> {
             removeTaskButton.setEffect(borderGlow);
@@ -552,7 +555,6 @@ public class Controller extends PlanParser implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if(newValue == null){
-                    adaptor.getRemoveWeekPlanButton().setDisable(true);
                     tasksVBox.setDisable(true);
                     daysHBox.setDisable(true);
                     toggleDays.selectToggle(null);
@@ -565,7 +567,6 @@ public class Controller extends PlanParser implements Initializable {
                     eDateLabel.setText("");
                 }
                 else {
-                    adaptor.getRemoveWeekPlanButton().setDisable(false);
                     toggleDays.selectToggle(null);
                     tasksVBox.setDisable(false);
                     daysHBox.setDisable(false);
@@ -586,7 +587,6 @@ public class Controller extends PlanParser implements Initializable {
                     removePatientButton.setDisable(true);
                     chatButton.setDisable(true);
                     newWeekPlanButton.setDisable(true);
-                    removeWeekPlanButton.setDisable(true);
                     chatButton.setVisible(true);
                     tasksVBox.setDisable(true);
                     daysHBox.setDisable(true);
@@ -810,7 +810,6 @@ public class Controller extends PlanParser implements Initializable {
                     weekPlanVBox.getChildren().clear();
                     coach.getPatientByName(patientSelected.getPatientName()).plans.remove(patientSelected.getWeekPlanByName(adaptor.getRemoveWplanName()));
                     adaptor.setWeekPlanSelected(null);
-                    removeWeekPlanButton.setDisable(true);
                     adaptor.getRemoveWbtn().defaultButtonProperty().setValue(false);
                     addWeekPlansToVBox();
                 }
@@ -1246,42 +1245,49 @@ private String sendHTTPRequestPost(String url) {
                 patientName.setTextAlignment(TextAlignment.CENTER);
                 patientName.setAlignment(Pos.CENTER);
                 patientName.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 12));
-                patientName.setStyle("-fx-background-color: #103F66; " +
-                "-fx-border-width: 2px; " +
-                "-fx-border-radius: 20px; " +
-                "-fx-background-radius: 20px; " +
-                "-fx-border-style: solid; " +
-                "-fx-border-color: #000000; " +
-                "-fx-text-fill: white; " 
-                );
+                                   patientName.setStyle("-fx-background-color: #103F66; " +
+                                                 "-fx-border-width: 2px; " +
+                                                 "-fx-border-radius: 20px; " +
+                                                 "-fx-background-radius: 20px; " +
+                                                 "-fx-border-style: solid; " +
+                                                 "-fx-border-color: #000000; " +
+                                                 "-fx-text-fill: white; " +
+                                                 "-fx-min-height: 45px; " +
+                                                 "-fx-pref-height: 45px; " +
+                                                 "-fx-max-height: 45px;");
                 patientName.setContentDisplay(ContentDisplay.CENTER);
                 patientName.setPrefWidth(Control.USE_COMPUTED_SIZE);
-                patientName.setPrefSize(155, 45);
-                patientName.setMinSize(155, 45);
-                patientName.setMaxSize(155, 45);
-                patientName.setToggleGroup(togglePatients); //ana hena
+                patientName.setPrefSize(155, 100);
+                patientName.setMinSize(155, 100);
+                patientName.setMaxSize(155, 100);
+                patientName.setToggleGroup(togglePatients);
                 patientName.selectedProperty().addListener(new ChangeListener<Boolean>() {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        if(newValue){
+                        if (newValue) {
+                            patientName.setStyle("-fx-background-color: #00FF00; " + 
+                                                 "-fx-border-width: 2px; " +
+                                                 "-fx-border-color: #000000; " + 
+                                                 "-fx-text-fill: white; " +
+                                                 "-fx-background-radius: 50%; " + 
+                                                 "-fx-min-height: 100px; " + 
+                                                 "-fx-min-width: 100px; " + 
+                                                 "-fx-pref-height: 100px; " +
+                                                 "-fx-pref-width: 100px; " +
+                                                 "-fx-max-height: 100px; " +
+                                                 "-fx-max-width: 100px;");
+                        } else {
                             patientName.setStyle("-fx-background-color: #103F66; " +
                             "-fx-border-width: 2px; " +
-                            "-fx-border-radius: 20px; " +
-                            "-fx-background-radius: 20px; " +
-                            "-fx-border-style: solid; " +
-                            "-fx-border-color: #000000; " +
-                            "-fx-text-fill: white; " 
-                            );
-                        }
-                        else {
-                            patientName.setStyle("-fx-background-color: #103F66; " +
-                            "-fx-border-width: 2px; " +
-                            "-fx-border-radius: 20px; " +
-                            "-fx-background-radius: 20px; " +
-                            "-fx-border-style: solid; " +
-                            "-fx-border-color: #000000; " +
-                            "-fx-text-fill: white; " 
-                            );
+                            "-fx-border-color: #000000; " + 
+                            "-fx-text-fill: white; " +
+                            "-fx-background-radius: 50%; " + 
+                            "-fx-min-height: 100px; " + 
+                            "-fx-min-width: 100px; " + 
+                            "-fx-pref-height: 100px; " +
+                            "-fx-pref-width: 100px; " +
+                            "-fx-max-height: 100px; " +
+                            "-fx-max-width: 100px;");
                         }
                     }
                 });
