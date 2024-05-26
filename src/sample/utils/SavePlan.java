@@ -766,14 +766,8 @@ public class SavePlan extends Patient{
             while ((sCurrentLine = br.readLine()) != null) {
                 patientFile += sCurrentLine;
             }
-//            String sCurrentLine2 = "";
-//            BufferedReader br2 = new BufferedReader(new FileReader("osos.txt"));
-//            while ((sCurrentLine2 = br2.readLine()) != null) {
-//                sCurrentLine2.replace("'", "%2C");
-//            }
             br.close();
             pFile.delete();
-            //Files.delete(Paths.get(p.patientName+".txt"));
             p.file = patientFile;
             System.out.println(patientFile);
             

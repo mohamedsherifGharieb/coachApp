@@ -42,7 +42,6 @@ public class Coach {
     public Patient getPatientByName(String pName) {
         for (int x = 0; x < this.patients.size(); x++){
             if (this.patients.get(x).getPatientName().equals(pName)){
-                System.out.println(this.patients.get(x).getPatientName() + " <<<< found patient");
                 return this.patients.get(x);
             }
         }

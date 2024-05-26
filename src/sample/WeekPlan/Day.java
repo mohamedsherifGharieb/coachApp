@@ -123,7 +123,6 @@ public class Day extends WeekPlan{
 	public Task getTaskByName(String tName) {
 		for (int x = 0; x < this.tasks.size(); x++){
 			if (this.tasks.get(x).getTaskName().equals(tName)){
-				//System.out.println(this.patients.get(x).getPatientName() + " <<<< found patient");
 				return this.tasks.get(x);
 			}
 		}

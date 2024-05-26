@@ -747,7 +747,6 @@ public class Main extends Application {
                 pgRequest = "c";
                 if(adaptor.getCoach().patients.size() != 0) {
                     for (int s = 0; s < adaptor.getCoach().patients.size(); s++) {
-                        //TODO: UPDATE EACH PATIENT FILE IN POSTGRESQL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                   	 try {
 								 SavePlan.savePlan(adaptor.getCoach().patients.get(s)); 
 								 System.out.println(adaptor.getCoach().patients.get(s));
@@ -1393,7 +1392,7 @@ public class Main extends Application {
                 }
             }
         });
-        adaptor.getAddTaskButton().setOnMouseClicked(event6 -> {
+        adaptor.getAddTaskButton().setOnMouseClicked(event6 -> {    
             addTStage = new Stage();
             addTLabel.setText("Add Task");
             tNameField.setText("");
@@ -1484,10 +1483,8 @@ public class Main extends Application {
             }
         });
 
-        //overall performance dialoge
         adaptor.getOverPerfButton().setOnMouseClicked(event5 -> {
             VBox overPerfVBox = new VBox();
-            //Label
             Label overPerfLabel = new Label("Overall Performance");
             overPerfLabel.setTextAlignment(TextAlignment.CENTER);
             overPerfLabel.setAlignment(Pos.CENTER);
@@ -1501,7 +1498,6 @@ public class Main extends Application {
             overPerfHBox.getChildren().add(overPerfLabel);
             overPerfHBox.setAlignment(Pos.CENTER);
             overPerfHBox.setStyle("-fx-background-color: #103F66;");
-            //Chart
             final NumberAxis yAxis = new NumberAxis();
             final CategoryAxis xAxis = new CategoryAxis();
             xAxis.setLabel("Days");

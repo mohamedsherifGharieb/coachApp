@@ -792,11 +792,6 @@ public class Controller extends PlanParser implements Initializable {
                             new WeekPlan(adaptor.getNewWPName(), adaptor.getSelectedSDate(), patientSelected.plans.size()+1));
                     weekPlanVBox.getChildren().clear();
                     addWeekPlansToVBox();
-//                    try {
-//                        SavePlan.savePlan(coach.getPatientByName(patientSelected.getPatientName()));
-//                    } catch (IOException e) {
-//
-//                    }
                     adaptor.getNewWbtn().defaultButtonProperty().setValue(false);
                 }
             }
@@ -1245,16 +1240,17 @@ private String sendHTTPRequestPost(String url) {
                 patientName.setTextAlignment(TextAlignment.CENTER);
                 patientName.setAlignment(Pos.CENTER);
                 patientName.setFont(new javafx.scene.text.Font("Copperplate Gothic Bold", 12));
-                                   patientName.setStyle("-fx-background-color: #103F66; " +
-                                                 "-fx-border-width: 2px; " +
-                                                 "-fx-border-radius: 20px; " +
-                                                 "-fx-background-radius: 20px; " +
-                                                 "-fx-border-style: solid; " +
-                                                 "-fx-border-color: #000000; " +
-                                                 "-fx-text-fill: white; " +
-                                                 "-fx-min-height: 45px; " +
-                                                 "-fx-pref-height: 45px; " +
-                                                 "-fx-max-height: 45px;");
+                patientName.setStyle("-fx-background-color: #103F66; " +
+                "-fx-border-width: 2px; " +
+                "-fx-border-color: transparent; " + 
+                "-fx-text-fill: white; " +
+                "-fx-background-radius: 50%; " + 
+                "-fx-min-height: 100px; " + 
+                "-fx-min-width: 100px; " + 
+                "-fx-pref-height: 100px; " +
+                "-fx-pref-width: 100px; " +
+                "-fx-max-height: 100px; " +
+                "-fx-max-width: 100px;");
                 patientName.setContentDisplay(ContentDisplay.CENTER);
                 patientName.setPrefWidth(Control.USE_COMPUTED_SIZE);
                 patientName.setPrefSize(155, 100);
@@ -1265,9 +1261,9 @@ private String sendHTTPRequestPost(String url) {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                         if (newValue) {
-                            patientName.setStyle("-fx-background-color: #00FF00; " + 
+                         patientName.setStyle("-fx-background-color: #00FF00; " +
                                                  "-fx-border-width: 2px; " +
-                                                 "-fx-border-color: #000000; " + 
+                                                 "-fx-border-color: transparent; " + 
                                                  "-fx-text-fill: white; " +
                                                  "-fx-background-radius: 50%; " + 
                                                  "-fx-min-height: 100px; " + 
@@ -1279,7 +1275,7 @@ private String sendHTTPRequestPost(String url) {
                         } else {
                             patientName.setStyle("-fx-background-color: #103F66; " +
                             "-fx-border-width: 2px; " +
-                            "-fx-border-color: #000000; " + 
+                            "-fx-border-color: transparent; " + 
                             "-fx-text-fill: white; " +
                             "-fx-background-radius: 50%; " + 
                             "-fx-min-height: 100px; " + 
